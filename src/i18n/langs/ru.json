@@ -1,0 +1,9 @@
+{
+    "main": "Главная",
+    "products": "Каталог",
+    "login": "Войти",
+    "logout": "Выйти",
+    "registration": "Регистрация",
+    "email": "Email",
+    "password": "Password"
+}

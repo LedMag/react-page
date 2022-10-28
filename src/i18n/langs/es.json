@@ -1,0 +1,9 @@
+{
+    "main": "Inicio",
+    "products": "Catalogo",
+    "login": "Login",
+    "logout": "Logout",
+    "registration": "Registración",
+    "email": "Email",
+    "password": "Password"
+}
