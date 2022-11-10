@@ -1,9 +1,17 @@
 {
+    "admin/logout": "Выйти",
+    "admin/products": "Каталог",
+    "admin/registration": "Регистрация",
+    "admin/addProducts": "Админ",
     "main": "Главная",
     "products": "Каталог",
     "login": "Войти",
     "logout": "Выйти",
     "registration": "Регистрация",
-    "email": "Email",
-    "password": "Password"
+    "email": "Электроный адресс",
+    "password": "Пароль",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "role": "Роль",
+    "password_confirmation": "Подтвердите пароль"
 }

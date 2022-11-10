@@ -1,8 +1,17 @@
 import { getAllProducts, getProductsByFilter } from "../../api/getProducts";
-import { put, call, all, fork, takeLatest } from 'redux-saga/effects'
-import { GET_ALL_PRODUCTS, GET_PRODUCTS_BY_FILTER } from "redux/constans";
-import { setProducts, setErrors, setLoaderState } from "redux/actions/actionCreator";
+import { put, call, all, fork, takeLatest, debounce } from 'redux-saga/effects'
+import { setProducts, setErrors, setLoaderState, setCategories, setCollections, setUser } from "redux/actions/actionCreator";
 import store from "redux/store";
+import { getAllCategories, getAllCollections } from "api/getData";
+import { login, logout, register } from "api/auth";
+import {
+    GET_ALL_PRODUCTS,
+    GET_DATA,
+    GET_PRODUCTS_BY_FILTER,
+    GET_USER,
+    POST_USER,
+    LOGOUT,
+} from "redux/constans";
 
 export function* handlerGetProducts() {
     yield put(setLoaderState(true));
@@ -18,8 +27,8 @@ export function* handlerGetProducts() {
 export function* handlerGetProductsByFilter() {
     yield put(setLoaderState(true));
     try {
-        const { filter } = store.getState().setFilter
-        const products: Generator = yield call(getProductsByFilter, filter);
+        const { filters } = store.getState().setFilters;
+        const products: Generator = yield call(getProductsByFilter, filters);
         yield put(setProducts(products));
     } catch (error) {
         yield put(setErrors('Products are not found'));
@@ -27,13 +36,67 @@ export function* handlerGetProductsByFilter() {
     yield put(setLoaderState(false));
 }
 
+export function* handlerPostUser() {
+    yield put(setLoaderState(true));
+    try {
+        const registrationForm = store.getState().registrationForm;
+
+        yield console.log(registrationForm)
+
+        const user: Generator = yield call(register, registrationForm);
+    } catch (error) {
+        yield put(setErrors('User was not registrated'));
+    }
+    yield put(setLoaderState(false));
+}
+
+export function* handlerGetUser() {
+    yield put(setLoaderState(true));
+    try {
+        const loginForm = store.getState().loginForm;
+
+        const user: Generator = yield call(login, loginForm);
+        yield put(setUser(user));
+    } catch (error) {
+        yield put(setErrors('User is not found'));
+    }
+    yield put(setLoaderState(false));
+}
+
+export function* handlerGetData() {
+    try {
+        const categories: Generator = yield call(getAllCategories);
+        yield put(setCategories(categories));
+        const collections: Generator = yield call(getAllCollections);
+        yield put(setCollections(collections));
+    } catch (error) {
+        throw new Error('Data is not founded');
+    }
+}
+
+export function* handlerLogout() {
+    try {
+        const token = store.getState().setUser.access_token;
+
+        const response: Generator = yield call(logout, token);
+        console.log(response)
+        // yield put(setUser({}));
+    } catch (error) {
+        throw new Error('Error of logout');
+    }
+}
+
 export function* watchProductsSaga() {
+    yield debounce(500, GET_PRODUCTS_BY_FILTER, handlerGetProductsByFilter);
     yield takeLatest(GET_ALL_PRODUCTS, handlerGetProducts);
-    yield takeLatest(GET_PRODUCTS_BY_FILTER, handlerGetProductsByFilter);
+    yield takeLatest(GET_DATA, handlerGetData);
+    yield takeLatest(GET_USER, handlerGetUser);
+    yield takeLatest(POST_USER, handlerPostUser);
+    yield takeLatest(LOGOUT, handlerLogout);
 }
 
 export default function* rootSaga() {
     yield all([
         fork(watchProductsSaga)
-    ]) 
+    ]);
 }

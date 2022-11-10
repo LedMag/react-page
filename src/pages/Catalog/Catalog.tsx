@@ -1,11 +1,12 @@
 import { getProductsByFilter } from 'api/getProducts';
+import FilterContainer from 'components/Filter/FilterContainer';
 import Product from 'components/Product/Product';
 import { IProduct } from 'components/Product/ProductTypes';
 import React, { ReactElement, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { setErrors } from 'redux/actions/actionCreator';
-import { GET_ALL_PRODUCTS, GET_PRODUCTS_BY_FILTER, SET_FILTER } from 'redux/constans';
+import { GET_ALL_PRODUCTS } from 'redux/constans';
 
 const Catalog = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -17,21 +18,8 @@ const Catalog = (): JSX.Element => {
         }
     });
 
-    const data = {
-        name: '',
-        category: 1,
-        collection: 1,
-        minPrice: 12,
-        maxPrice: 50,
-        order: 'asc',
-    };
-
     useEffect( () => {
         dispatch({type: GET_ALL_PRODUCTS});
-        dispatch({type: SET_FILTER, payload: data});
-        setTimeout( () => {
-            dispatch({type: GET_PRODUCTS_BY_FILTER});
-        }, 2000)
     }, [dispatch])
 
     const renderProducts = (products: Array<IProduct>): Array<JSX.Element> => {
@@ -41,9 +29,11 @@ const Catalog = (): JSX.Element => {
         return productsList;
     }
     return (
-        <div className={'content'}>
-            {isLoading ? <h3>Is Loading...</h3> : (error ? <h2>{error}</h2> : renderProducts(products)) }
-            {/* {error ? <h2>{error}</h2> : renderProducts(products)} */}
+        <div style={{'display': 'flex', 'justifyContent': 'center', 'alignItems': 'start'}}>
+            <FilterContainer />
+            <div className={'content'}>
+                {isLoading ? <h3>Is Loading...</h3> : (error ? <h2>{error}</h2> : renderProducts(products)) }
+            </div>
         </div>
     )
 }

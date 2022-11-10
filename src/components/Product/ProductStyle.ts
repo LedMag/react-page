@@ -59,7 +59,7 @@ export const ProductHover = styled.div`
     position: relative;
     width: 250px;
     height: 250px;
-    margin: 10px;
+    // margin: 10px;
     overflow: hidden;
     cursor: pointer;
 

@@ -1,9 +1,17 @@
 {
+    "admin/logout": "Logout",
+    "admin/products": "Catalog",
+    "admin/registration": "Registration",
+    "admin/addProducts": "Admin",
     "main": "Main",
     "products": "Catalog",
     "login": "Login",
     "logout": "Logout",
     "registration": "Registration",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "name": "Name",
+    "surname": "Surname",
+    "role": "Role",
+    "password_confirmation": "Password confirmation"
 }
