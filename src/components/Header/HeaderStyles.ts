@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { NavLink as BaseNavLink } from 'react-router-dom';
 
 export const HeaderStyled = styled.header`
-    width: 100%;
+    // width: 100%;
     height: auto;
     display: grid;
     grid-template-areas:

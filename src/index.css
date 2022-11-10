@@ -1,3 +1,23 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input{
+  height: 30px;
+  padding: 5px;
+}
+
+select{
+  height: 30px;
+  padding: 5px;
+}
+
+button{
+  border: none;
+}
+
 body {
   margin: 0;
   background-image: url('utils/images/background.png');
@@ -14,73 +34,9 @@ code {
     monospace;
 }
 
-
-.product {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 250px;
-  height: 250px;
-  margin: 10px;
-  overflow: hidden;
-}
-
-.product__btns {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  bottom: 0;
-  left: 0;
-  padding: 5px;
-  z-index: 9;
-}
-
-.product__image {
-  opacity: 1;
-  height: 100%;
-  transition: .5s ease;
-  backface-visibility: hidden;
-  object-fit: cover;
-}
-
-.product__info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(176, 176, 176, 0.7);
-  padding: 5px;
-  color: white;
-}
-
-.middle {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.product:hover .image {
-  opacity: 0.3;
-}
-
-.product:hover .middle {
-  opacity: 1;
-}
-
-.product__name {
-}
-
 .content {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 0 auto;
+  width: calc(250px * 3);
+  min-height: calc(250px * 4);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
