@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProductForm, setProductForm } from 'redux/actions/actionCreator';
-import { GET_ALL_PRODUCTS } from 'redux/constans';
+import { GET_ALL_PRODUCTS, POST_PRODUCTS } from 'redux/constans';
 import { 
     Container,
     ProductsWrapper,
@@ -35,9 +35,11 @@ const INITIAL_PRODUCT_FORM = {
 
 const CreateProducts = (): JSX.Element => {
     const dispatch = useDispatch();
-    const { forms } = useSelector( (store: any) => {
+    const { forms, categories, collections } = useSelector( (store: any) => {
         return {
             forms: store.productsForms,
+            categories: store.setData.categories,
+            collections: store.setData.collections,
         }
     });
 
@@ -62,7 +64,7 @@ const CreateProducts = (): JSX.Element => {
 
         const keys = Object.keys(forms);
         return Array.from(keys).map( key => {
-            return <ProductForm key={key} index={key} form={forms[key]} onClick={handlerDelete} onChange={handleChange} />
+            return <ProductForm key={key} index={key} form={forms[key]} data={{categories, collections}} onClick={handlerDelete} onChange={handleChange} />
         })
     }
 
@@ -77,12 +79,18 @@ const CreateProducts = (): JSX.Element => {
         }
     }
 
+    const handleSubmit = (event: any) => {
+        event.preventDefault();
+        dispatch({type: POST_PRODUCTS});
+    }
+
     return (
         <Container>
             <ProductsWrapper>
                 {forms ? getForms(forms) : ''}
             </ProductsWrapper>
             <Button onClick={handleClick} >Add product</Button>
+            <Button onClick={handleSubmit} >Submit</Button>
         </Container>
     )
 }

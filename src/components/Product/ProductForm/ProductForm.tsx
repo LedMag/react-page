@@ -29,12 +29,13 @@ interface IProductForm {
 interface IProductFormElement {
     index: string,
     form: IProductForm,
+    data: any,
     onClick: Function,
     onChange: Function,
 }
 
 const ProductForm = (
-    {index, form, onClick, onChange}: IProductFormElement
+    {index, form, data, onClick, onChange}: IProductFormElement
     ): JSX.Element => {
 
     const getProductForm = (form: any): IProductForm | undefined => {
@@ -75,6 +76,18 @@ const ProductForm = (
         return <ProductImage src={src} alt="image" />
     }
 
+    const getCategories = (categories: any) => {
+        return categories.map( (category: any) => {
+            return <option key={category.id} label={category.name} value={category.id}></option>
+        })
+    }
+
+    const getCollections = (collections: any) => {
+        return collections.map( (collection: any) => {
+            return <option key={collection.id} label={collection.name} value={collection.id}></option>
+        })
+    }
+
     return (
         <Form id="productForm" onChange={ (event: any) => {
             event.preventDefault();
@@ -102,9 +115,11 @@ const ProductForm = (
                     <Input name="price" type="number" placeholder="price" defaultValue={form.price} />
                     <Select name="category" defaultValue={form.category} >
                         <option label="category" value={0}></option>
+                        {getCategories(data.categories)}
                     </Select>
                     <Select name="collection" defaultValue={form.collection} >
                         <option label="collection" value={0}></option>
+                        {getCollections(data.collections)}
                     </Select>
                 </ProductInputs>
             </FormHeader>

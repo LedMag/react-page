@@ -47,8 +47,8 @@ const App = (): JSX.Element => {
             <main style={{'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center'}}>
                 <Routes>
                     <Route path="/" element={<Main />} />
+                    <Route path="/products" element={<Catalog />} />
                     <Route path="/admin" element={<PrivateRoutes isAllowed={isAuth} path='/' />} >
-                      <Route path="products" element={<Catalog />} />
                       <Route path="logout" element={<Logout />} />
                       <Route path="registration" element={<Registration />} />
                     </Route>

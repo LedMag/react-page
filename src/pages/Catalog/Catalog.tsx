@@ -28,11 +28,12 @@ const Catalog = (): JSX.Element => {
         })
         return productsList;
     }
+
     return (
         <div style={{'display': 'flex', 'justifyContent': 'center', 'alignItems': 'start'}}>
             <FilterContainer />
             <div className={'content'}>
-                {isLoading ? <h3>Is Loading...</h3> : (error ? <h2>{error}</h2> : renderProducts(products)) }
+                {isLoading ? <h3>Is Loading...</h3> : (error && !products ? <h2>{error}</h2> : renderProducts(products)) }
             </div>
         </div>
     )
