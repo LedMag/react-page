@@ -1,6 +1,6 @@
 import { getAllProducts, getProductsByFilter } from "../../api/getProducts";
 import { put, call, all, fork, takeLatest, debounce } from 'redux-saga/effects'
-import { setProducts, setErrors, setLoaderState, setCategories, setCollections, setUser } from "redux/actions/actionCreator";
+import { setProducts, setErrors, setLoaderState, setCategories, setCollections, setUser, deleteProductForm } from "redux/actions/actionCreator";
 import store from "redux/store";
 import { getAllCategories, getAllCollections } from "api/getData";
 import { login, logout, register } from "api/auth";
@@ -11,7 +11,9 @@ import {
     GET_USER,
     POST_USER,
     LOGOUT,
+    POST_PRODUCTS,
 } from "redux/constans";
+import { postProducts } from "api/postProducts";
 
 export function* handlerGetProducts() {
     yield put(setLoaderState(true));
@@ -79,10 +81,20 @@ export function* handlerLogout() {
         const token = store.getState().setUser.access_token;
 
         const response: Generator = yield call(logout, token);
-        console.log(response)
         // yield put(setUser({}));
     } catch (error) {
         throw new Error('Error of logout');
+    }
+}
+
+export function* handlerCreateProducts() {
+    try {
+        const forms = store.getState().productsForms;
+
+        const response: Generator = yield call(postProducts, forms);
+        yield put(deleteProductForm({}));
+    } catch (error) {
+        throw new Error('Error of Post Products');
     }
 }
 
@@ -92,6 +104,7 @@ export function* watchProductsSaga() {
     yield takeLatest(GET_DATA, handlerGetData);
     yield takeLatest(GET_USER, handlerGetUser);
     yield takeLatest(POST_USER, handlerPostUser);
+    yield takeLatest(POST_PRODUCTS, handlerCreateProducts);
     yield takeLatest(LOGOUT, handlerLogout);
 }
 

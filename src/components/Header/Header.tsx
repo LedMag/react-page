@@ -7,7 +7,7 @@ import { LOCALES } from 'i18n/locales';
 
 const Header = ({currentLang, setLocale}: any): JSX.Element | null => {
 
-    const links = ["main", "admin/products", "admin/addProducts", "login", "admin/registration", "admin/logout"];
+    const links = ["main", "products", "admin/addProducts", "login", "admin/registration", "admin/logout"];
 
     const languages = [
         { name: 'English', code: LOCALES.ENGLISH },

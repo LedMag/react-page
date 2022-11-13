@@ -3,6 +3,7 @@ export const GET_PRODUCTS_BY_FILTER = 'GET_PRODUCTS_BY_FILTER';
 export const GET_DATA = 'GET_DATA';
 export const GET_USER = 'GET_USER';
 export const POST_USER = 'POST_USER';
+export const POST_PRODUCTS = 'POST_PRODUCTS';
 export const LOGOUT = 'LOGOUT';
 export const SET_ALL_CATEGORIES = 'SET_ALL_CATEGORIES';
 export const SET_ALL_COLLECTIONS = 'SET_ALL_COLLECTIONS';
