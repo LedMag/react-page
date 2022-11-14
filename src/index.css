@@ -33,10 +33,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.content {
-  width: calc(250px * 3);
-  min-height: calc(250px * 4);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}

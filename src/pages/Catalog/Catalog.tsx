@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { setErrors } from 'redux/actions/actionCreator';
 import { GET_ALL_PRODUCTS } from 'redux/constans';
+import { CatalogBox, Content } from './CatalogStyle';
 
 const Catalog = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -30,12 +31,12 @@ const Catalog = (): JSX.Element => {
     }
 
     return (
-        <div style={{'display': 'flex', 'justifyContent': 'center', 'alignItems': 'start'}}>
+        <CatalogBox>
             <FilterContainer />
-            <div className={'content'}>
-                {isLoading ? <h3>Is Loading...</h3> : (error && !products ? <h2>{error}</h2> : renderProducts(products)) }
-            </div>
-        </div>
+            <Content className={'content'}>
+                {isLoading ? <h3 style={{'width': '100%'}}>Is Loading...</h3> : (error && !products ? <h2 style={{'width': '100%'}}>{error}</h2> : renderProducts(products)) }
+            </Content>
+        </CatalogBox>
     )
 }
 

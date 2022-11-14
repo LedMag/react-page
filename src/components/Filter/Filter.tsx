@@ -17,11 +17,18 @@ let Filter = ({params: {filters, categories, collections}, handleChange}: any):J
     const dispatch = useDispatch();
 
     const getFormData = (form: any) => {
+        if(!form) return undefined;
         const filter: any = {};
-        form.forEach( (defaultValue: string | number, key: string) => {
-            filter[key] = defaultValue;
+
+        const formData = new FormData(form);
+ 
+        const keys = formData.keys();
+        Array.from(keys).forEach( key => {
+            filter[key] = formData.get(key);
         })
         filter.order = 'asc';
+        console.log(filter);
+
         return filter;
     } 
 
@@ -29,22 +36,22 @@ let Filter = ({params: {filters, categories, collections}, handleChange}: any):J
 
     const categoryOptions = categories.map( (category: any) => {
         return (
-            <option label={category.name} defaultValue={category.id} key={category.id} />
+            <option label={category.name} value={category.id} key={category.id} />
         )
     });
 
     const collectionOptions = collections.map( (collection: any) => {
         return (
-            <option label={collection.name} defaultValue={collection.id} key={collection.id} />
+            <option label={collection.name} value={collection.id} key={collection.id} />
         )
     });
 
     return (
         <FilterBox
             id='filter' 
-            onChange={ () => {
-                const formData = form ? new FormData(form) : null;
-                handleChange(getFormData(formData));
+            onChange={ (event: any) => {
+                // const formData = form ? new FormData(form) : null;
+                handleChange(getFormData(event.target.form));
             }}
         >
             <label htmlFor={'name'} >Name</label>
@@ -52,13 +59,13 @@ let Filter = ({params: {filters, categories, collections}, handleChange}: any):J
 
             <label htmlFor={'category'} >Category</label>
             <SelectCategory name={'category'} defaultValue={filters.category} >
-                <option label={'-'} defaultValue={''} />
+                <option label="-" value={0}></option>
                 {collectionOptions}
             </SelectCategory>
 
             <label htmlFor={'collection'} >Collection</label>
             <SelectCollection name={'collection'} defaultValue={filters.collection} >
-                <option label={'-'} defaultValue={''} />
+                <option label="-" value={0}></option>
                 {collectionOptions}
             </SelectCollection>
 
