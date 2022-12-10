@@ -8,7 +8,7 @@ const Navbar = ({links}: any):JSX.Element => {
         const elements = arr.map( (link, index) => {
             return (
             <Li key={index}>
-                <NavLink to={"/" + link} key={index}>
+                <NavLink to={`/${link !== 'main' ? link : ''}` } key={index}>
                     <FormattedMessage id={link} />
                 </NavLink>
             </Li>

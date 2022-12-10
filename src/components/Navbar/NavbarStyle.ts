@@ -10,8 +10,8 @@ export const Menu = styled.menu`
 export const Nav = styled.nav`
     margin-top: 22px;
     padding: 2px;
-    border-top: 1px solid #B7C8CC;
-    border-bottom: 1px solid #B7C8CC;
+    border-top: 1px solid ${colors.blue};
+    border-bottom: 1px solid ${colors.blue};
     
 `
 export const Ul = styled.ul`
@@ -19,7 +19,7 @@ export const Ul = styled.ul`
     justify-content: end;
     padding: 5px;
     margin: 0;
-    background-color: #B7C8CC;
+    background-color: ${colors.blue};
     list-style-type: none;
 `
 export const Li = styled.li`

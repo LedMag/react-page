@@ -5,6 +5,7 @@ export const GET_USER = 'GET_USER';
 export const POST_USER = 'POST_USER';
 export const POST_PRODUCTS = 'POST_PRODUCTS';
 export const LOGOUT = 'LOGOUT';
+export const SET_LANG = 'SET_LANG';
 export const SET_ALL_CATEGORIES = 'SET_ALL_CATEGORIES';
 export const SET_ALL_COLLECTIONS = 'SET_ALL_COLLECTIONS';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
@@ -14,6 +15,7 @@ export const SET_USER = 'SET_USER';
 export const SET_LOGIN_FORM = 'SET_LOGIN_FORM';
 export const SET_REGISTRATION_FORM = 'SET_REGISTRATION_FORM';
 export const SET_PRODUCT_FORM = 'SET_PRODUCT_FORM';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const DELETE_PRODUCT_FORM = 'DELETE_PRODUCT_FORM';
 
 export const SET_PRODUCTS_ERROR = 'SET_PRODUCTS_ERROR';

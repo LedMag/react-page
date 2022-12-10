@@ -1,4 +1,5 @@
 import { 
+    SET_LANG,
     SET_PRODUCTS,
     SET_PRODUCTS_ERROR,
     SET_LOADING_DATA,
@@ -9,8 +10,14 @@ import {
     SET_LOGIN_FORM,
     SET_REGISTRATION_FORM,
     SET_PRODUCT_FORM,
+    DELETE_PRODUCT,
     DELETE_PRODUCT_FORM,
- } from '../constans';
+} from '../constans';
+
+export const setLang = (payload: any) => ({
+    type: SET_LANG,
+    payload,
+});
 
 export const setProducts = (payload: any) => ({
     type: SET_PRODUCTS,
@@ -64,5 +71,10 @@ export const setProductForm = (payload: any) => ({
 
 export const deleteProductForm = (payload: any) => ({
     type: DELETE_PRODUCT_FORM,
+    payload,
+});
+
+export const deleteProduct = (payload: number) => ({
+    type: DELETE_PRODUCT,
     payload,
 });

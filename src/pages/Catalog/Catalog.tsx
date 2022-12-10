@@ -13,7 +13,7 @@ const Catalog = (): JSX.Element => {
     const dispatch = useDispatch();
     const { products, error, isLoading } = useSelector( (store: any) => {
         return {
-            products: store.setProducts.products,
+            products: store.products.products,
             error: store.setErrors.productsError,
             isLoading: store.loader.isLoadingData,
         }

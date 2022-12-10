@@ -51,6 +51,7 @@ export const ProductHover = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 9;
   `
   export const NavLink = styled(BaseNavLink)`
     display: flex;
@@ -70,5 +71,25 @@ export const ProductHover = styled.div`
       ${ProductImage} {
         opacity: 0.3;
       }
+    }
+  `
+
+  export const Delete = styled.button`
+    padding: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: pink;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 99;
+
+    &:hover{
+      background-color: red;
+    }
+
+    &:active {
+      transform: scale(0.95);
     }
   `

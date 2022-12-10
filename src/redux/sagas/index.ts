@@ -12,8 +12,10 @@ import {
     POST_USER,
     LOGOUT,
     POST_PRODUCTS,
+    DELETE_PRODUCT,
 } from "redux/constans";
 import { postProducts } from "api/postProducts";
+import { deleteProducts } from "api/deleteProducts";
 
 export function* handlerGetProducts() {
     yield put(setLoaderState(true));
@@ -42,8 +44,6 @@ export function* handlerPostUser() {
     yield put(setLoaderState(true));
     try {
         const registrationForm = store.getState().registrationForm;
-
-        yield console.log(registrationForm)
 
         const user: Generator = yield call(register, registrationForm);
     } catch (error) {
@@ -98,6 +98,15 @@ export function* handlerCreateProducts() {
     }
 }
 
+export function* handlerDeleteProducts(action: any) {
+    try {
+        const response: Generator = yield call(deleteProducts, action.payload);
+        yield handlerGetProducts();
+    } catch (error) {
+        throw new Error('Error of Post Products');
+    }
+}
+
 export function* watchProductsSaga() {
     yield debounce(500, GET_PRODUCTS_BY_FILTER, handlerGetProductsByFilter);
     yield takeLatest(GET_ALL_PRODUCTS, handlerGetProducts);
@@ -105,6 +114,7 @@ export function* watchProductsSaga() {
     yield takeLatest(GET_USER, handlerGetUser);
     yield takeLatest(POST_USER, handlerPostUser);
     yield takeLatest(POST_PRODUCTS, handlerCreateProducts);
+    yield takeLatest(DELETE_PRODUCT, handlerDeleteProducts);
     yield takeLatest(LOGOUT, handlerLogout);
 }
 
