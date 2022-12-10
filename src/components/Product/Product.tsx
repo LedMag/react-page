@@ -1,10 +1,26 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { NavLink, ProductHover, ProductImage, ProductInfo } from './ProductStyle';
+import { useDispatch } from 'react-redux';
+import { deleteProduct } from 'redux/actions/actionCreator';
+import {
+    NavLink,
+    ProductHover,
+    ProductImage,
+    ProductInfo,
+    Delete,
+ } from './ProductStyle';
 import { IProduct } from './ProductTypes';
 
 const Product = ({product}: { product: IProduct}): JSX.Element => {
-    
+
+    const dispatch = useDispatch();
+    const isAdmin = true;
+
+    const handlerDelete = (event: any) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch(deleteProduct(product.id));
+    }
     return (
         <NavLink to={"/products/" + product.id} key={product.id} state={product} >
             <ProductImage src={product.url} alt={product.name} />
@@ -14,6 +30,11 @@ const Product = ({product}: { product: IProduct}): JSX.Element => {
                     <p className="product__price">€ {product.price}</p>
                 </ProductInfo>
             </ProductHover>
+            {
+                isAdmin ?
+                <Delete onClick={handlerDelete}>Delete</Delete> :
+                ''
+            }
         </NavLink>
     )
 }

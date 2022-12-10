@@ -2,15 +2,17 @@ import { combineReducers } from "redux";
 import { setErrors } from "./error";
 import { loader } from "./loader";
 import { setData } from "./setData";
-import { setProducts } from "./setProducts";
+import { products } from "./products";
 import { setFilters } from "./filters";
 import { setUser } from "./user";
 import { loginForm } from "./loginForm";
 import { registrationForm } from "./registration";
 import { productsForms } from "./productsForms";
+import { lang } from "./lang";
 
 const reducer = combineReducers({
-    setProducts,
+    lang,
+    products,
     setFilters,
     setErrors,
     setData,

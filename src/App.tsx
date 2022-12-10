@@ -16,6 +16,7 @@ import PrivateRoutes from 'utils/PrivateRoutes';
 import userEvent from '@testing-library/user-event';
 import { useSelector } from 'react-redux';
 import CreateProducts from 'pages/admin/CreateProducts.ts/CreateProducts';
+import ProductDetails from 'components/Product/ProductDetails/ProductDetails';
 
 const App = (): JSX.Element => {
 
@@ -48,6 +49,7 @@ const App = (): JSX.Element => {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/products" element={<Catalog />} />
+                    <Route path="/products/:id" element={<ProductDetails />} />
                     <Route path="/admin" element={<PrivateRoutes isAllowed={isAuth} path='/' />} >
                       <Route path="logout" element={<Logout />} />
                       <Route path="registration" element={<Registration />} />
