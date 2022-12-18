@@ -53,8 +53,8 @@ const App = (): JSX.Element => {
                     <Route path="/admin" element={<PrivateRoutes isAllowed={isAuth} path='/' />} >
                       <Route path="logout" element={<Logout />} />
                       <Route path="registration" element={<Registration />} />
+                      <Route path="addProducts" element={<CreateProducts />} />
                     </Route>
-                    <Route path="/admin/addProducts" element={<CreateProducts />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="*" element={(<h2>Error 404</h2>)} />
                 </Routes>

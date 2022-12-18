@@ -58,6 +58,7 @@ export function* handlerGetUser() {
         const loginForm = store.getState().loginForm;
 
         const user: Generator = yield call(login, loginForm);
+        yield console.log('User', user)
         yield put(setUser(user));
     } catch (error) {
         yield put(setErrors('User is not found'));

@@ -12,6 +12,6 @@
     "password": "Contraseña",
     "name": "Nombre",
     "surname": "Apellido",
-    "role": "Rol",
+    "roles": "Rol",
     "password_confirmation": "Confirmar contraseña"
 }

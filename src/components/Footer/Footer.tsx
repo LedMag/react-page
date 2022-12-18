@@ -1,17 +1,13 @@
-import { Menu, Nav, Ul } from 'components/Navbar/NavbarStyle';
 import React from 'react';
-import { FooterStyled } from './FooterStyle';
+import { FooterStyled, Bar, Inner, Bottom } from './FooterStyle';
 
 const Footer = (): JSX.Element | null  => {
     return (
         <FooterStyled>
-            <Menu>
-                <Nav>
-                    <Ul>
-                        <div style={{"height": "16px"}}></div>
-                    </Ul>
-                </Nav>
-            </Menu>
+            <Bar>
+                <Inner />
+            </Bar>
+            <Bottom />
         </FooterStyled>
     )
 }

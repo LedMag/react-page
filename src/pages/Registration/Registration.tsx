@@ -9,7 +9,7 @@ interface IRegistrationForm {
     name: string;
     surname: string;
     email: string;
-    role: string;
+    roles: string;
     password: string;
     password_confirmation: string;
 }
@@ -24,7 +24,7 @@ const Registration = (): JSX.Element => {
             name: store.registrationForm.name,
             surname: store.registrationForm.surname,
             email: store.registrationForm.email,
-            role: store.registrationForm.role,
+            roles: store.registrationForm.roles,
             password: store.registrationForm.password,
             password_confirmation: store.registrationForm.password_confirmation,
         }
@@ -68,8 +68,8 @@ const Registration = (): JSX.Element => {
             <FormattedMessage id='surname' />
             <Input name='surname' />
 
-            <FormattedMessage id='role' />
-            <Input name='role' />
+            <FormattedMessage id='roles' />
+            <Input name='roles' />
 
             <FormattedMessage id='email' />
             <Input name='email' />

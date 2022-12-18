@@ -12,6 +12,6 @@
     "password": "Password",
     "name": "Name",
     "surname": "Surname",
-    "role": "Role",
+    "roles": "Role",
     "password_confirmation": "Password confirmation"
 }

@@ -4,7 +4,7 @@ const initialState = {
     name: '',
     surname: '',
     email: '',
-    role: '',
+    roles: '',
     password: '',
     password_confirmation: '',
 }
