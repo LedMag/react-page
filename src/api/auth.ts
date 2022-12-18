@@ -1,5 +1,5 @@
 export const login = async (data: {email: string, password: string}) => {
-    const res = await fetch('http://127.0.0.1:80/api/auth/login', {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ export const login = async (data: {email: string, password: string}) => {
 }
 
 export const logout = async (token: string) => {
-    const res = await fetch('http://127.0.0.1:80/api/auth/logout', {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
@@ -21,7 +21,7 @@ export const logout = async (token: string) => {
 }
 
 export const register = async (data: any) => {
-    const res = await fetch('http://127.0.0.1:80/api/auth/register', {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 export const getAllProducts = async () => {
-    const res = await fetch('http://127.0.0.1/api/products');
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/products`);
     return await res.json();
 }
 
@@ -10,6 +10,6 @@ export const getProductsByFilter = async (data: any) => {
         body: JSON.stringify(data),
     };
 
-    const res = await fetch('http://127.0.0.1/api/products/sort', options);
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/products/sort`, options);
     return await res.json();
 }

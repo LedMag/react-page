@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import { colors } from 'theme/colors';
 
 export const SliderContainer = styled.div`  
-    // width: 80%;
-    height: 300px;
+    width: 100%;
+    height: auto;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    // box-shadow: 2px 2px black;
 }
 `
 
@@ -45,8 +48,8 @@ export const Prev = styled(Next)`
 
 export const SlideImage = styled.img` 
     // position: absolute;
-    height: 100%;
-    // width: 100%;
+    // height: 100%;
+    width: 100%;
     opacity: 1;
 `
 

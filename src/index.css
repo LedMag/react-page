@@ -19,6 +19,9 @@ button{
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   background-image: url('utils/images/background.png');
   font-size: 18px;

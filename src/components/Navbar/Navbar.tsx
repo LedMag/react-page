@@ -1,8 +1,10 @@
-import React from 'react';
-import { Menu, Nav, Ul, Li, NavLink } from './NavbarStyle';
+import React, { useState } from 'react';
+import { Menu, Nav, Ul, Li, NavLink, Inner, Button } from './NavbarStyle';
 import { FormattedMessage } from 'react-intl';
 
 const Navbar = ({links}: any):JSX.Element => {
+
+    const [open, setOpne] = useState(false);
 
     const getLinkElements = (arr: Array<string>): Array<JSX.Element> => {
         const elements = arr.map( (link, index) => {
@@ -19,11 +21,17 @@ const Navbar = ({links}: any):JSX.Element => {
 
     return (
         <Menu>
-            <Nav>
-                <Ul>
-                    {getLinkElements(links)}
-                </Ul>
-            </Nav>
+            <Inner>
+                <Nav open={open}>
+                    <Ul>
+                        {getLinkElements(links)}
+                    </Ul>
+                </Nav>
+                <Button open={open} onClick={ (e) => {
+                        e.preventDefault();
+                        setOpne(!open);
+                    }} />
+            </Inner>
         </Menu>
     )
 }
