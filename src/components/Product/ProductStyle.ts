@@ -1,16 +1,6 @@
 import { NavLink as BaseNavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-/* export const HeaderStyled = styled.header`
-    width: 100%;
-    height: auto;
-    display: grid;
-    grid-template-areas:
-    "A B"
-    "A C"
-    "D D";
-` */
-
 export const ProductBtns = styled.div`
     display: flex;
     justify-content: space-between;
@@ -60,7 +50,6 @@ export const ProductHover = styled.div`
     position: relative;
     width: 250px;
     height: 250px;
-    // margin: 10px;
     overflow: hidden;
     cursor: pointer;
 

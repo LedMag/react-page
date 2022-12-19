@@ -1,12 +1,21 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-    width: 320px;
-    // max-height: 350px;
+    width: 300px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     position: relative;
+
+    @media(min-width: 320px) {
+        
+    }
+
+    @media(min-width: 425px) {}
+
+    @media(min-width: 768px) {}
+
+    @media(min-width: 1024px) {}
 `
 
 export const Button = styled.button`
@@ -38,13 +47,13 @@ export const Button = styled.button`
 `
 
 export const FormHeader = styled.div`
-    width: 300px;
+    width: 100%;
     height: auto;
     display: flex;
 `
 
 export const FormFooter = styled.div`
-    width: 300px;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -86,8 +95,8 @@ export const Select = styled.select`
 `
 
 export const Textarea = styled.textarea`
-    max-width: 300px;
-    min-width: 300px;
+    max-width: 280px;
+    min-width: 280px;
     min-height: 75px;
     max-height: 75px;
     padding: 5px;
