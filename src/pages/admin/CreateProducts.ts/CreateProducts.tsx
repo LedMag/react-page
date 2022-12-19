@@ -5,8 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProductForm, setProductForm } from 'redux/actions/actionCreator';
 import { GET_ALL_PRODUCTS, POST_PRODUCTS } from 'redux/constans';
-import { 
-    Container,
+import {
     ProductsWrapper,
     Button,
  } from './CreateProductsStyle';
@@ -85,13 +84,13 @@ const CreateProducts = (): JSX.Element => {
     }
 
     return (
-        <Container>
-            <ProductsWrapper>
-                {forms ? getForms(forms) : ''}
-            </ProductsWrapper>
-            <Button onClick={handleClick} >Add product</Button>
-            <Button onClick={handleSubmit} >Submit</Button>
-        </Container>
+        <>
+        <ProductsWrapper>
+            {forms ? getForms(forms) : ''}
+        </ProductsWrapper>
+        <Button onClick={handleClick} >Add product</Button>
+        <Button onClick={handleSubmit} >Submit</Button>
+        </>
     )
 }
 

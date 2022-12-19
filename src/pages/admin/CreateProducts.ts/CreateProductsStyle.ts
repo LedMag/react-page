@@ -1,25 +1,25 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-`
-
 export const Button = styled.button`
-    width: 150px;
-    height: 50px;
     cursor: pointer;
-    font-size: 20px;
     background-color: light-grey;
-    border-radius: 5px;
+
+    @media(min-width: 320px) {
+        width: 280px;
+        padding: 10px;
+        margin: 5px;
+        font-size: 20px;
+        border-radius: 5px;
+    }
+
+    @media(min-width: 425px) {}
+
+    @media(min-width: 768px) {}
+
+    @media(min-width: 1024px) {}
     
     &:active{
-        width: 148px;
-        height: 48px;
-        margin: 1px;
+        transform: scale(0.97);
     }
 
     &:hover{
@@ -28,9 +28,10 @@ export const Button = styled.button`
 `
 
 export const ProductsWrapper = styled.div`
+    width: 100%;
     max-width: 960px;
     display: flex;
     flex-wrap: wrap;
     flex-wrapper: wrap;
-    justify-content: start;
+    justify-content: center;
 `

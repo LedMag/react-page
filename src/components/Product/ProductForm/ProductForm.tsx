@@ -76,17 +76,17 @@ const ProductForm = (
         return <ProductImage src={src} alt="image" />
     }
 
-    const getCategories = (categories: any) => {
-        return categories.map( (category: any) => {
-            return <option key={category.id} label={category.name} value={category.id}></option>
-        })
-    }
+    // const getCategories = (categories: any) => {
+    //     return categories.map( (category: any) => {
+    //         return <option key={category.id} label={category.name} value={category.id}></option>
+    //     })
+    // }
 
-    const getCollections = (collections: any) => {
-        return collections.map( (collection: any) => {
-            return <option key={collection.id} label={collection.name} value={collection.id}></option>
-        })
-    }
+    // const getCollections = (collections: any) => {
+    //     return collections.map( (collection: any) => {
+    //         return <option key={collection.id} label={collection.name} value={collection.id}></option>
+    //     })
+    // }
 
     return (
         <Form id="productForm" onChange={ (event: any) => {
@@ -113,14 +113,14 @@ const ProductForm = (
                 <ProductInputs>
                     <Input name="name" type="text" placeholder="name" defaultValue={form.name} />
                     <Input name="price" type="number" placeholder="price" defaultValue={form.price} />
-                    <Select name="category" defaultValue={form.category} >
+                    {/* <Select name="category" defaultValue={form.category} >
                         <option label="category" value={0}></option>
                         {getCategories(data.categories)}
                     </Select>
                     <Select name="collection" defaultValue={form.collection} >
                         <option label="collection" value={0}></option>
                         {getCollections(data.collections)}
-                    </Select>
+                    </Select> */}
                 </ProductInputs>
             </FormHeader>
             <FormFooter>
