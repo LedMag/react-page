@@ -50,6 +50,7 @@ export const FormHeader = styled.div`
     width: 100%;
     height: auto;
     display: flex;
+    flex-direction: column;
 `
 
 export const FormFooter = styled.div`
@@ -60,16 +61,12 @@ export const FormFooter = styled.div`
 `
 
 export const ProductImageInput = styled.div`
-    width: 120px;
-    height: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 300px;
     position: relative;
-
-    input{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: 0;
-    }
+    margin-bottom: 10px;
 `
 
 export const ProductImage = styled.img`
@@ -81,8 +78,8 @@ export const ProductImage = styled.img`
 `
 
 export const ProductInputs = styled.div`
-    width: 180px;
-    height: 120px;
+    width: 100%;
+    height: auto;
 `
 
 export const Input = styled.input`

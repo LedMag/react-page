@@ -1,3 +1,4 @@
+import InputImages from 'components/InputFiles/Images/InputImages';
 import React, { FormEventHandler, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,10 +8,8 @@ import {
     FormHeader,
     FormFooter,
     ProductImageInput,
-    ProductImage,
     ProductInputs,
     Input,
-    Select,
     Textarea,
     Button,
 } from './ProductFormStyle';
@@ -32,11 +31,17 @@ interface IProductFormElement {
     data: any,
     onClick: Function,
     onChange: Function,
+    getFiles: Function
 }
 
 const ProductForm = (
-    {index, form, data, onClick, onChange}: IProductFormElement
+    {index, form, data, onClick, onChange, getFiles}: IProductFormElement
     ): JSX.Element => {
+    const [files, setFiles] = useState<File[]>([]);
+
+    useEffect( () => {
+        getFiles(files, index);
+    }, [files])
 
     const getProductForm = (form: any): IProductForm | undefined => {
         if(!form) return undefined;
@@ -57,24 +62,29 @@ const ProductForm = (
         onChange({[index]: {...form, ...data}});
     }
 
-    const handleImage = (event: any) => {
-        const file: File = event?.target?.files[0];
-        if(file && file.type.substring(0, 5) === 'image') {
-            return setPreviewImage(file);
-        }
+    const handleImage = (file: File) => {
+        setFiles([...files, file]);
+        // files.push(file);
     }
 
-    const setPreviewImage = (image: File) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            handleChange({...form, ...{image: reader.result as string}});
-        };
-        reader.readAsDataURL(image);
+    const deleteImage = (name: string) => {
+        const filtered = files.filter( file => {
+            return file.name !== name;
+        });
+        setFiles(filtered);
     }
 
-    const getImage = (src: string) => {
-        return <ProductImage src={src} alt="image" />
-    }
+    // const setPreviewImage = (image: File) => {
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //         handleChange({...form, ...{image: reader.result as string}});
+    //     };
+    //     reader.readAsDataURL(image);
+    // }
+
+    // const getImage = (src: string) => {
+    //     return <ProductImage src={src} alt="image" />
+    // }
 
     // const getCategories = (categories: any) => {
     //     return categories.map( (category: any) => {
@@ -101,14 +111,10 @@ const ProductForm = (
             >x</Button>
             <FormHeader>
                 <ProductImageInput>
-                    <Input
-                        id="inputImage"
-                        name="image"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImage}
-                    />
-                    {form.image ? getImage(form.image) : ''}
+                    <InputImages getFile={handleImage} deleteFile={deleteImage} />
+                    <InputImages getFile={handleImage} deleteFile={deleteImage} />
+                    <InputImages getFile={handleImage} deleteFile={deleteImage} />
+                    <InputImages getFile={handleImage} deleteFile={deleteImage} />
                 </ProductImageInput>
                 <ProductInputs>
                     <Input name="name" type="text" placeholder="name" defaultValue={form.name} />

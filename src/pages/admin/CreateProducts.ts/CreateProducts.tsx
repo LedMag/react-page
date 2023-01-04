@@ -4,18 +4,19 @@ import { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProductForm, setProductForm } from 'redux/actions/actionCreator';
-import { GET_ALL_PRODUCTS, POST_PRODUCTS } from 'redux/constans';
+import { GET_ALL_PRODUCTS, POST_PRODUCT } from 'redux/constans';
 import {
     ProductsWrapper,
     Button,
+    CreateProductContainer
  } from './CreateProductsStyle';
 
  interface IProductForm {
     name: string,
     price: string,
-    image: string,
-    category: string,
-    collection: string,
+    // image: string,
+    // category: string,
+    // collection: string,
     description_en: string,
     description_es: string,
     description_ru: string,
@@ -24,15 +25,20 @@ import {
 const INITIAL_PRODUCT_FORM = {
     name: '',
     price: '',
-    image: '',
-    category: '',
-    collection: '',
+    // image: '',
+    // category: '',
+    // collection: '',
     description_en: '',
     description_es: '',
     description_ru: '',
 }
 
+type Image = {[key: string]: {files?: File[]}};
+
+export type IProduct = {form: IProductForm, files?: File[]};
+
 const CreateProducts = (): JSX.Element => {
+    const [images, setImages] = useState<Image>({})
     const dispatch = useDispatch();
     const { forms, categories, collections } = useSelector( (store: any) => {
         return {
@@ -46,6 +52,14 @@ const CreateProducts = (): JSX.Element => {
         const keys = Object.keys(forms);
         const buffForms = forms as any;
         const newForms: any = {};
+        const newImages: any[] = [];
+        delete images[index as keyof Image];
+        // images.forEach(image => {
+        //     if(image.index !== index){
+        //         newImages.push(image);
+        //     }
+        // });
+        // setImages(newImages);
         Array.from(keys).forEach( key => {
             if(key !== index){
                 newForms[key] = buffForms[key];
@@ -58,12 +72,27 @@ const CreateProducts = (): JSX.Element => {
         dispatch(setProductForm({...forms, ...form}));
     }
 
+    const getFiles = (files: File[], index: number) => {
+        const key = index + '';
+        images[key] = {files};
+
+        // if(images.length) {
+        //     images.forEach( image => {
+        //         if(image.index === `${index}`) {
+        //             image.files = files;
+        //         }
+        //     })   
+        // } else {
+        //     images.push({index: `${index}`, files});
+        // }
+    }
+
     const getForms = (forms: any) => {
         if(!forms) return;
 
         const keys = Object.keys(forms);
         return Array.from(keys).map( key => {
-            return <ProductForm key={key} index={key} form={forms[key]} data={{categories, collections}} onClick={handlerDelete} onChange={handleChange} />
+            return <ProductForm key={key} index={key} form={forms[key]} data={{categories, collections}} onClick={handlerDelete} onChange={handleChange} getFiles={getFiles} />
         })
     }
 
@@ -78,19 +107,26 @@ const CreateProducts = (): JSX.Element => {
         }
     }
 
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
-        dispatch({type: POST_PRODUCTS});
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();        
+        const buff = Object.keys(forms)
+        const products: IProduct[] = [];
+
+        for (const index of buff) {
+            products.push({form: forms[index], files: images![index as keyof Image].files})
+        }
+
+        dispatch({type: POST_PRODUCT, payload: products});        
     }
 
     return (
-        <>
-        <ProductsWrapper>
-            {forms ? getForms(forms) : ''}
-        </ProductsWrapper>
-        <Button onClick={handleClick} >Add product</Button>
-        <Button onClick={handleSubmit} >Submit</Button>
-        </>
+        <CreateProductContainer>
+            <ProductsWrapper>
+                {forms ? getForms(forms) : ''}
+            </ProductsWrapper>
+            <Button onClick={handleClick} >Add product</Button>
+            <Button onClick={handleSubmit} >Submit</Button>
+        </CreateProductContainer>
     )
 }
 

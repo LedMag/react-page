@@ -11,7 +11,6 @@ export const SliderContainer = styled.div`
     align-items: center;
     padding-top: 5px;
     padding-bottom: 5px;
-    // box-shadow: 2px 2px black;
 }
 `
 
@@ -47,8 +46,6 @@ export const Prev = styled(Next)`
 `
 
 export const SlideImage = styled.img` 
-    // position: absolute;
-    // height: 100%;
     width: 100%;
     opacity: 1;
 `
