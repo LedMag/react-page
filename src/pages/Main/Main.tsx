@@ -5,7 +5,7 @@ import { Section } from './MainStyle';
 
 const Main = (): JSX.Element => {
     return (
-        <Section className='main'>
+        <Section>
             <Slider />
         </Section>
     )

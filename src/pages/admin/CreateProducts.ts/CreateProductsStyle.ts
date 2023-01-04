@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const CreateProductContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 export const Button = styled.button`
     cursor: pointer;
     background-color: light-grey;
@@ -29,7 +36,7 @@ export const Button = styled.button`
 
 export const ProductsWrapper = styled.div`
     width: 100%;
-    max-width: 960px;
+    // max-width: 960px;
     display: flex;
     flex-wrap: wrap;
     flex-wrapper: wrap;

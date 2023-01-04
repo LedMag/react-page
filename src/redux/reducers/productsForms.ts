@@ -2,7 +2,7 @@ import { SET_PRODUCT_FORM, DELETE_PRODUCT_FORM } from "redux/constans";
 
 const initialState = {
     '0': {
-        image: '',
+        // image: '',
         name: '',
         price: '',
         // category: '',
