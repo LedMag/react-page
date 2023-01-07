@@ -1,4 +1,5 @@
-import React from 'react';
+import { getImage } from 'api/getProducts';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from 'redux/actions/actionCreator';
@@ -12,6 +13,28 @@ import {
 import { IProduct } from './ProductTypes';
 
 const Product = ({product}: { product: IProduct}): JSX.Element => {
+    const [image, setImage] = useState<string>('');
+
+    const createImageFromBlob = (chunk: Blob) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+            if(reader.result) {
+                setImage(reader.result as string);     
+            }
+        });
+    
+        if (chunk) {
+          reader.readAsDataURL(chunk);
+        }
+    }
+
+    useEffect( () => {
+        getImage(product.id+'').then( data => {
+            if(data){
+                createImageFromBlob(data)
+            }
+        })
+    })
 
     const dispatch = useDispatch();
     const isAdmin = true;
@@ -23,7 +46,7 @@ const Product = ({product}: { product: IProduct}): JSX.Element => {
     }
     return (
         <NavLink to={"/products/" + product.id} key={product.id} state={product} >
-            <ProductImage src={product.url} alt={product.name} />
+            <ProductImage src={image} alt={product.name} />
             <ProductHover>
                 <ProductInfo>
                     <p className="product__name">{product.name}</p>

@@ -48,8 +48,8 @@ export const ProductHover = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     cursor: pointer;
 

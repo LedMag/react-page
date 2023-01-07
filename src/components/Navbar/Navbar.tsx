@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
-import { Menu, Nav, Ul, Li, NavLink, Inner, Button } from './NavbarStyle';
+import React, { useEffect, useState } from 'react';
+import { Menu, Nav, Ul, Li, NavLink, Inner, Button, FilterButton } from './NavbarStyle';
 import { FormattedMessage } from 'react-intl';
+import { useDispatch, useSelector } from 'react-redux';
+import { TOGGLE_FILTER } from 'redux/constans';
 
 const Navbar = ({links}: any):JSX.Element => {
+    const dispatch = useDispatch();
 
-    const [open, setOpne] = useState(false);
+    const [open, setOpen] = useState(false);
+    const { isOpen } = useSelector( (store: any) => {
+        return {
+            isOpen: store.toggleFilter,
+        }
+    });
 
     const getLinkElements = (arr: Array<string>): Array<JSX.Element> => {
         const elements = arr.map( (link, index) => {
@@ -22,6 +30,12 @@ const Navbar = ({links}: any):JSX.Element => {
     return (
         <Menu>
             <Inner>
+                <FilterButton open={open} onClick={ (e) => {
+                        e.preventDefault();
+                        console.log(isOpen);
+                        
+                        dispatch({type: TOGGLE_FILTER, payload: !isOpen});
+                    }} />
                 <Nav open={open}>
                     <Ul>
                         {getLinkElements(links)}
@@ -29,7 +43,7 @@ const Navbar = ({links}: any):JSX.Element => {
                 </Nav>
                 <Button open={open} onClick={ (e) => {
                         e.preventDefault();
-                        setOpne(!open);
+                        setOpen(!open);
                     }} />
             </Inner>
         </Menu>

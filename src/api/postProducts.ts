@@ -6,8 +6,7 @@ export const postProducts = async (products: IProduct[]) => {
 
     for await (const product of products) {          
         const data = JSON.stringify(product.form);
-        console.log(product);
-        
+
         await fetch(url, {
             method: 'POST',
             mode: 'cors',
