@@ -16,10 +16,6 @@ export const uploadFile = (file: File, id: string, name: string) => {
     const rf = new FileReader();
 
     rf.onload = async function (data) {
-        // const size = data.total;
-        // const type = data.type;
-        console.log('type', ext);
-        
         await postFile(rf.result as ArrayBuffer, name, ext, id)
     }
     rf.readAsArrayBuffer(file);

@@ -12,6 +12,7 @@ import {
     SET_PRODUCT_FORM,
     DELETE_PRODUCT,
     DELETE_PRODUCT_FORM,
+    TOGGLE_FILTER,
 } from '../constans';
 
 export const setLang = (payload: any) => ({
@@ -76,5 +77,10 @@ export const deleteProductForm = (payload: any) => ({
 
 export const deleteProduct = (payload: number) => ({
     type: DELETE_PRODUCT,
+    payload,
+});
+
+export const toggleFilter = (payload: boolean) => ({
+    type: TOGGLE_FILTER,
     payload,
 });

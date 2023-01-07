@@ -3,7 +3,7 @@ import { setErrors } from "./error";
 import { loader } from "./loader";
 import { setData } from "./setData";
 import { products } from "./products";
-import { setFilters } from "./filters";
+import { setFilters, toggleFilter } from "./filters";
 import { setUser } from "./user";
 import { loginForm } from "./loginForm";
 import { registrationForm } from "./registration";
@@ -21,6 +21,7 @@ const reducer = combineReducers({
     loginForm,
     registrationForm,
     productsForms,
+    toggleFilter
 });
 
 export default reducer;

@@ -19,7 +19,7 @@ export const Inner = styled.div`
         position: relative;
         height: 26px;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
         padding: 0 10px;
         background-color: ${colors.blue};
@@ -30,6 +30,45 @@ export const Inner = styled.div`
         height: auto;
     }
 `
+export const FilterButton = styled.div<Open>`
+@media(min-width: 320px) {
+    position: relative;
+    height: 3px;
+    width: 15px;
+    background-color: ${ ({open}) => open ? colors.blue : colors.white};
+    transition: all 0.3s easy;
+    // &:after {
+    //     content: '';
+    //     display: block;
+    //     position: absolute;
+    //     top: ${ ({open}) => open ? 0 : -6}px;
+    //     left: 0;
+    //     height: 3px;
+    //     width: 15px;
+    //     transform: rotate(${ ({open}) => open ? 45 : 0}deg);
+    //     background-color: ${colors.white};
+    //     transition: all 0.3s easy;
+    // }
+
+    // &:before {
+    //     content: '';
+    //     display: block;
+    //     position: absolute;
+    //     top: ${ ({open}) => open ? 0 : 6}px;
+    //     left: 0;
+    //     height: 3px;
+    //     width: 15px;
+    //     transform: rotate(${ ({open}) => open ? -45 : 0}deg);
+    //     background-color: ${colors.white};
+    //     transition: all 0.3s easy;
+    // }
+}
+
+@media(min-width: 768px) {
+    display: none;
+}
+`
+
 
 export const Button = styled.div<Open>`
     @media(min-width: 320px) {

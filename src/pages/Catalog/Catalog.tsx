@@ -1,4 +1,4 @@
-import { getProductsByFilter } from 'api/getProducts';
+import { getImage, getProductsByFilter } from 'api/getProducts';
 import FilterContainer from 'components/Filter/FilterContainer';
 import Product from 'components/Product/Product';
 import { IProduct } from 'components/Product/ProductTypes';
@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { setErrors } from 'redux/actions/actionCreator';
 import { GET_ALL_PRODUCTS } from 'redux/constans';
-import { CatalogBox, Content } from './CatalogStyle';
+import { CatalogBox, Content, ProductBox } from './CatalogStyle';
 
 const Catalog = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -24,8 +24,10 @@ const Catalog = (): JSX.Element => {
     }, [dispatch])
 
     const renderProducts = (products: Array<IProduct>): Array<JSX.Element> => {
+        console.log(products);
+        
         const productsList: Array<JSX.Element> = products.map( (product: IProduct) => {
-            return <Product key={product.id} product={product} />
+            return <ProductBox><Product key={product.id} product={product} /></ProductBox>
         })
         return productsList;
     }
