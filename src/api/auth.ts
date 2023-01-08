@@ -1,13 +1,16 @@
 export const login = async (data: {email: string, password: string}) => {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json; charset=UTF-8",
             'Accept': 'application/json',
         },
         body: JSON.stringify(data)
-    });
-    return await res.json();
+    })
+    .then( res => res.json())
+    .then( cred => {
+        document.cookie = `token=${cred.access_token}; max-age=${864000}; path=/; samesite=strict;`
+    })
 }
 
 export const logout = async (token: string) => {
