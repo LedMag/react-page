@@ -1,5 +1,5 @@
 export const login = async (data: {email: string, password: string}) => {
-    await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
+    return await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json; charset=UTF-8",
@@ -9,7 +9,8 @@ export const login = async (data: {email: string, password: string}) => {
     })
     .then( res => res.json())
     .then( cred => {
-        document.cookie = `token=${cred.access_token}; max-age=${864000}; path=/; samesite=strict;`
+        document.cookie = `token=${cred.access_token}; max-age=${864000}; path=/; samesite=strict;`;
+        return {id: cred.id, email: cred.email, role: cred.role};
     })
 }
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { redirect } from 'react-router-dom';
 import { setLoginForm } from 'redux/actions/actionCreator';
 import { GET_USER } from 'redux/constans';
-import { Form, Input, Label } from './LoginStyle';
+import { Form, Input, Label, Button } from './LoginStyle';
 
 const Login = (): JSX.Element => {
     const form: HTMLFormElement | null = document.querySelector('#login');
@@ -55,7 +55,7 @@ const Login = (): JSX.Element => {
                 <FormattedMessage id='password' />
                 <Input name='password' defaultValue={password} type='password' />
 
-                <button type='submit' >Submit</button>
+                <Button type='submit' >Submit</Button>
             </Form>
         )
 }

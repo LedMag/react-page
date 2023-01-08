@@ -2,10 +2,8 @@ import { SET_USER } from "redux/constans";
 
 const initialState = {
     id: 0,
-    name: "",
-    surname: "",
     email: "",
-    roles: '',
+    role: "",
 }
 
 
@@ -13,7 +11,7 @@ export const setUser = (state = {}, {type, payload}: any) => {
     switch(type){
         case SET_USER:
             return {
-                ...payload.user
+                ...payload
             };
         default: return state;
     }

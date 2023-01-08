@@ -9,7 +9,7 @@ import { setErrors } from 'redux/actions/actionCreator';
 import { GET_ALL_PRODUCTS } from 'redux/constans';
 import { CatalogBox, Content, ProductBox } from './CatalogStyle';
 
-const Catalog = (): JSX.Element => {
+const Catalog = ({isAllowed}: {isAllowed: boolean}): JSX.Element => {
     const dispatch = useDispatch();
     const { products, error, isLoading } = useSelector( (store: any) => {
         return {
@@ -23,11 +23,9 @@ const Catalog = (): JSX.Element => {
         dispatch({type: GET_ALL_PRODUCTS});
     }, [dispatch])
 
-    const renderProducts = (products: Array<IProduct>): Array<JSX.Element> => {
-        console.log(products);
-        
+    const renderProducts = (products: Array<IProduct>): Array<JSX.Element> => {        
         const productsList: Array<JSX.Element> = products.map( (product: IProduct) => {
-            return <ProductBox><Product key={product.id} product={product} /></ProductBox>
+            return <ProductBox key={product.id}><Product key={product.id} product={product} isAllowed={isAllowed}/></ProductBox>
         })
         return productsList;
     }

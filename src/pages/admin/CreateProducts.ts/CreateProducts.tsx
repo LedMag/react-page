@@ -54,12 +54,6 @@ const CreateProducts = (): JSX.Element => {
         const newForms: any = {};
         const newImages: any[] = [];
         delete images[index as keyof Image];
-        // images.forEach(image => {
-        //     if(image.index !== index){
-        //         newImages.push(image);
-        //     }
-        // });
-        // setImages(newImages);
         Array.from(keys).forEach( key => {
             if(key !== index){
                 newForms[key] = buffForms[key];
@@ -75,16 +69,6 @@ const CreateProducts = (): JSX.Element => {
     const getFiles = (files: File[], index: number) => {
         const key = index + '';
         images[key] = {files};
-
-        // if(images.length) {
-        //     images.forEach( image => {
-        //         if(image.index === `${index}`) {
-        //             image.files = files;
-        //         }
-        //     })   
-        // } else {
-        //     images.push({index: `${index}`, files});
-        // }
     }
 
     const getForms = (forms: any) => {

@@ -1,8 +1,9 @@
 {
-    "admin/logout": "Logout",
-    "admin/products": "Catalogo",
-    "admin/registration": "Registración",
-    "admin/addProducts": "Admin",
+    "admin": "Admin",
+    "logout": "Logout",
+    "products": "Catalogo",
+    "registration": "Registración",
+    "addProducts": "Crear",
     "main": "Inicio",
     "products": "Catalogo",
     "login": "Login",

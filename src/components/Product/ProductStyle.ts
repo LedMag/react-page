@@ -66,7 +66,7 @@ export const ProductHover = styled.div`
   export const Delete = styled.button`
     padding: 5px;
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
     background-color: pink;
     color: white;

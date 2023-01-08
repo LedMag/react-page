@@ -35,6 +35,11 @@ export const setUser = (payload: any) => ({
     payload,
 });
 
+export const logout = (payload = {id: 0, email: '', role: ''}) => ({
+    type: SET_USER,
+    payload,
+});
+
 export const setErrors = (payload: string) => ({
     type: SET_PRODUCTS_ERROR,
     payload,

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { colors } from 'theme/colors';
 
 type Open = {open: boolean};
+type HasSearch =  {hasSearch: boolean};
 
 export const Menu = styled.menu`
     @media(min-width: 320px) {     
@@ -13,16 +14,37 @@ export const Menu = styled.menu`
         border-bottom: 1px solid ${colors.blue};
     }
 `
+export const FilterButton = styled.div<Open>`
+    @media(min-width: 320px) {
+        position: relative;
+        height: 60%;
+        transform: rotate(18deg);
+        width: 20px;
+        color: ${colors.white};
+        font-size: 14px;
+        letter-spacing: -2px;
+        font-weight: bold;
+        transition: all 0.3s easy;
+    }
 
-export const Inner = styled.div`
+    @media(min-width: 768px) {
+        display: none;
+    }
+`
+
+export const Inner = styled.div<HasSearch>`
     @media(min-width: 320px) {
         position: relative;
         height: 26px;
         display: flex;
-        justify-content: space-between;
+        justify-content: ${ ({hasSearch}) => hasSearch ? 'space-between' : 'flex-end'};
         align-items: center;
         padding: 0 10px;
         background-color: ${colors.blue};
+
+        ${FilterButton} {
+            display: ${ ({hasSearch}) => hasSearch ? 'block' : 'none'}; 
+        }
     }
 
     @media(min-width: 768px) {
@@ -30,45 +52,6 @@ export const Inner = styled.div`
         height: auto;
     }
 `
-export const FilterButton = styled.div<Open>`
-@media(min-width: 320px) {
-    position: relative;
-    height: 3px;
-    width: 15px;
-    background-color: ${ ({open}) => open ? colors.blue : colors.white};
-    transition: all 0.3s easy;
-    // &:after {
-    //     content: '';
-    //     display: block;
-    //     position: absolute;
-    //     top: ${ ({open}) => open ? 0 : -6}px;
-    //     left: 0;
-    //     height: 3px;
-    //     width: 15px;
-    //     transform: rotate(${ ({open}) => open ? 45 : 0}deg);
-    //     background-color: ${colors.white};
-    //     transition: all 0.3s easy;
-    // }
-
-    // &:before {
-    //     content: '';
-    //     display: block;
-    //     position: absolute;
-    //     top: ${ ({open}) => open ? 0 : 6}px;
-    //     left: 0;
-    //     height: 3px;
-    //     width: 15px;
-    //     transform: rotate(${ ({open}) => open ? -45 : 0}deg);
-    //     background-color: ${colors.white};
-    //     transition: all 0.3s easy;
-    // }
-}
-
-@media(min-width: 768px) {
-    display: none;
-}
-`
-
 
 export const Button = styled.div<Open>`
     @media(min-width: 320px) {
@@ -117,7 +100,7 @@ export const Nav = styled.nav<Open>`
         right: 0;
         padding: 10px;
         background-color: ${colors.blue};
-        z-index: 99;
+        z-index: 299;
     }
 
     @media(min-width: 768px) {
