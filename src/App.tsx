@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import { IntlProvider } from 'react-intl';
@@ -17,6 +17,7 @@ import userEvent from '@testing-library/user-event';
 import { useSelector } from 'react-redux';
 import CreateProducts from 'pages/admin/CreateProducts.ts/CreateProducts';
 import ProductDetails from 'components/Product/ProductDetails/ProductDetails';
+import Admin from 'pages/admin/Admin';
 
 const App = (): JSX.Element => {
 
@@ -26,7 +27,7 @@ const App = (): JSX.Element => {
     return {
         user: store.setUser,
     }
-});
+  });
 
   function getInitialLocale() {
     const savedLocale = localStorage.getItem('locale')
@@ -38,7 +39,7 @@ const App = (): JSX.Element => {
     localStorage.setItem('locale', lang)
   }
 
-  const isAuth = user && user.roles?.includes('admin') ? true : false
+  const isAuth = user && user.role === 'admin' ? true : false
 
   return (
     <IntlProvider locale={currentLocale} defaultLocale={LOCALES.ENGLISH} messages={messages[currentLocale]}>
@@ -48,14 +49,17 @@ const App = (): JSX.Element => {
             <main style={{'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center', 'position': 'relative'}}>
                 <Routes>
                     <Route path="/" element={<Main />} />
-                    <Route path="/products" element={<Catalog />} />
-                    <Route path="/products/:id" element={<ProductDetails />} />
-                    <Route path="addProducts" element={<CreateProducts />} />
-                    <Route path="/admin" element={<PrivateRoutes isAllowed={isAuth} path='/' />} >
+                    <Route path="products" element={<Catalog isAllowed={false} />} />
+                    <Route path="products/:id" element={<ProductDetails />} />
+                    <Route path="admin" element={<PrivateRoutes children={<Admin />} isAllowed={isAuth} path='/' />} >
+                      <Route path="" element={<CreateProducts />} />
+                      <Route path="products" element={<Catalog isAllowed={isAuth} />} />
+                      <Route path="addProducts" element={<CreateProducts />} />
                       <Route path="logout" element={<Logout />} />
-                      <Route path="registration" element={<Registration />} />
+                      {/* <Route path="registration" element={<Registration />} /> */}
+                      <Route path="*" element={<CreateProducts />} />
                     </Route>
-                    <Route path="/login" element={<Login />} />
+                    <Route path="login" element={<Login />} />
                     <Route path="*" element={(<h2>Error 404</h2>)} />
                 </Routes>
           </main>

@@ -1,8 +1,9 @@
 {
-    "admin/logout": "Выйти",
-    "admin/products": "Каталог",
-    "admin/registration": "Регистрация",
-    "admin/addProducts": "Админ",
+    "admin": "Админ",
+    "logout": "Выйти",
+    "products": "Каталог",
+    "registration": "Регистрация",
+    "addProducts": "Добавить",
     "main": "Главная",
     "products": "Каталог",
     "login": "Войти",

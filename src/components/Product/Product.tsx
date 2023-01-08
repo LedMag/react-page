@@ -12,7 +12,7 @@ import {
  } from './ProductStyle';
 import { IProduct } from './ProductTypes';
 
-const Product = ({product}: { product: IProduct}): JSX.Element => {
+const Product = ({product, isAllowed}: { product: IProduct, isAllowed: boolean}): JSX.Element => {
     const [image, setImage] = useState<string>('');
 
     const createImageFromBlob = (chunk: Blob) => {
@@ -37,7 +37,6 @@ const Product = ({product}: { product: IProduct}): JSX.Element => {
     })
 
     const dispatch = useDispatch();
-    const isAdmin = true;
 
     const handlerDelete = (event: any) => {
         event.preventDefault();
@@ -54,7 +53,7 @@ const Product = ({product}: { product: IProduct}): JSX.Element => {
                 </ProductInfo>
             </ProductHover>
             {
-                isAdmin ?
+                isAllowed ?
                 <Delete onClick={handlerDelete}>Delete</Delete> :
                 ''
             }

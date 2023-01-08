@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ProductBox, ProductHover, ProductImage, ProductInfo } from './ProductDetailsStyle';
+import { ProductBox, ProductImages, ProductImage, ProductInfo } from './ProductDetailsStyle';
 import { IProduct } from '../ProductTypes';
 import { useLocation } from 'react-router-dom';
 
@@ -17,16 +17,19 @@ const ProductDetails = ( /* {product}: { product: IProduct} */): JSX.Element => 
 
     return (
         <ProductBox>
-            <ProductImage src={product.url} alt={product.name} />
+            <ProductImage src={product.img_url} alt={product.name} />
+            <ProductImages>
+                {/* <ProductImage src={product.images[0]} alt={product.name} />
+                <ProductImage src={product.images[1]} alt={product.name} />
+                <ProductImage src={product.images[2]} alt={product.name} /> */}
+            </ProductImages>
             <ProductInfo>
                 <p className="product__name">{product.name}</p>
                 <p className="product__price">€ {product.price}</p>
-                <p className="product__price">{product.category}</p>
-                <p className="product__price">{product.collection}</p>
-                <p className="product__price">{getDescription()}</p>
+                {/* <p className="product__price">{product.category}</p>
+                <p className="product__price">{product.collection}</p> */}
+                <p className="product__description">{getDescription()}</p>
             </ProductInfo>
-            {/* <ProductHover>
-            </ProductHover> */}
         </ProductBox>
     )
 }

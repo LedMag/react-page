@@ -1,9 +1,8 @@
 import { Outlet, Navigate } from "react-router-dom";
 
-
-const PrivateRoutes = ({isAllowed, path}: {isAllowed: boolean, path: string}) => {
+const PrivateRoutes = ({children, isAllowed, path}: {children: JSX.Element, isAllowed: boolean, path: string}) => {
     return (
-            isAllowed ? <Outlet/> : <Navigate to={path} />
+            isAllowed ? children : <Navigate to={path} />
         )
 }
 
