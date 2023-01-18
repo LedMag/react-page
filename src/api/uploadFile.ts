@@ -1,10 +1,12 @@
 export const postFile = async (file: ArrayBuffer, name: string, ext: string, id: string) => {
-    const url = `http://localhost:9000/api/product/uploadFile?id=${id}&name=${name}&ext=${ext}`;
+    const token = document.cookie.split('=')[2];
+    const url = `${process.env.REACT_APP_API_URL}/product/uploadFile?id=${id}&name=${name}&ext=${ext}`;
     return fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/octet-stream",
             "Content-Disposition": `attachment; filename="image.${ext}"`,
+            "Authorization": `Bearer ${token}`,
             // 'Content-Lenght': `${size}`
         },
         body: file

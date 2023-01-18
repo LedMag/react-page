@@ -2,6 +2,7 @@ import { IProduct } from '../pages/admin/CreateProducts.ts/CreateProducts'
 import { uploadFile } from './uploadFile';
 
 export const postProducts = async (products: IProduct[]) => {
+    const token = document.cookie.split('=')[2];
     const url = `${process.env.REACT_APP_API_URL}/product/`;
 
     for await (const product of products) {          
@@ -13,6 +14,7 @@ export const postProducts = async (products: IProduct[]) => {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json; charset=UTF-8",
+                "Authorization": `Bearer ${token}`,
             },
             body: data
         })
