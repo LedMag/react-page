@@ -23,7 +23,8 @@ const Catalog = ({isAllowed}: {isAllowed: boolean}): JSX.Element => {
         dispatch({type: GET_ALL_PRODUCTS});
     }, [dispatch])
 
-    const renderProducts = (products: Array<IProduct>): Array<JSX.Element> => {        
+    const renderProducts = (products: Array<IProduct>): Array<JSX.Element> | undefined => {  
+        if(!products) return;      
         const productsList: Array<JSX.Element> = products.map( (product: IProduct) => {
             return <ProductBox key={product.id}><Product key={product.id} product={product} isAllowed={isAllowed}/></ProductBox>
         })
