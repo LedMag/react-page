@@ -24,7 +24,7 @@ const Catalog = ({isAllowed}: {isAllowed: boolean}): JSX.Element => {
     }, [dispatch])
 
     const renderProducts = (products: Array<IProduct>): Array<JSX.Element> | undefined => {  
-        if(!products) return;      
+        if(!products.length) return;      
         const productsList: Array<JSX.Element> = products.map( (product: IProduct) => {
             return <ProductBox key={product.id}><Product key={product.id} product={product} isAllowed={isAllowed}/></ProductBox>
         })
@@ -35,7 +35,7 @@ const Catalog = ({isAllowed}: {isAllowed: boolean}): JSX.Element => {
         <CatalogBox>
             <FilterContainer />
             <Content className={'content'}>
-                {isLoading ? <h3 style={{'width': '100%'}}>Is Loading...</h3> : (error && !products ? <h2 style={{'width': '100%'}}>{error}</h2> : renderProducts(products)) }
+                {isLoading ? <h3 style={{'width': '100%'}}>Is Loading...</h3> : (error && !products.length ? <h2 style={{'width': '100%'}}>{error}</h2> : renderProducts(products)) }
             </Content>
         </CatalogBox>
     )
