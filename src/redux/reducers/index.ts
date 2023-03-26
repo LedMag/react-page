@@ -9,10 +9,13 @@ import { loginForm } from "./loginForm";
 import { registrationForm } from "./registration";
 import { productsForms } from "./productsForms";
 import { lang } from "./lang";
+import { product } from "./product";
+import { cart } from "./cart";
 
 const reducer = combineReducers({
     lang,
     products,
+    product,
     setFilters,
     setErrors,
     setData,
@@ -21,7 +24,8 @@ const reducer = combineReducers({
     loginForm,
     registrationForm,
     productsForms,
-    toggleFilter
+    toggleFilter,
+    cart
 });
 
 export default reducer;

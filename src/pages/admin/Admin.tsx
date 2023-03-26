@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'Container';
 import { LOCALES } from 'i18n/locales'
 import { BrowserRouter as Router, Outlet } from 'react-router-dom';
 import Main from 'pages/Main/Main';
 import Logout from 'pages/Logout/Logout';
-import { useSelector } from 'react-redux';
-import CreateProducts from 'pages/admin/CreateProducts.ts/CreateProducts';
+import { useDispatch, useSelector } from 'react-redux';
+import CreateProducts from 'pages/admin/CreateProducts/CreateProducts';
 import PrivateRoutes from 'utils/PrivateRoutes';
 import Navbar from 'components/Navbar/Navbar';
 import { Li, Menu, Nav, Link, Ul } from './AdminStyle';
 import { FormattedMessage } from 'react-intl';
 import Login from 'pages/Login/Login';
+import { SET_LANG } from 'redux/constans';
 
 const Admin = (): JSX.Element => {
 
@@ -27,11 +28,6 @@ const Admin = (): JSX.Element => {
     function getInitialLocale() {
         const savedLocale = localStorage.getItem('locale')
         return savedLocale || LOCALES.ENGLISH
-    }
-
-    const handleChange = (lang: string) => {
-        setCurrentLocale(lang)
-        localStorage.setItem('locale', lang)
     }
 
     const getLinkElements = (arr: Array<string>): Array<JSX.Element> => {

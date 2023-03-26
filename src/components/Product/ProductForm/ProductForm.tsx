@@ -15,9 +15,11 @@ import {
 } from './ProductFormStyle';
 
 interface IProductForm {
+    id?: number,
     name: string,
     price: string,
     image: string,
+    imgs: string[],
     category: string,
     collection: string,
     description_en: string,
@@ -28,14 +30,15 @@ interface IProductForm {
 interface IProductFormElement {
     index: string,
     form: IProductForm,
-    data: any,
+    data?: any,
+    edit: boolean,
     onClick: Function,
     onChange: Function,
     getFiles: Function
 }
 
 const ProductForm = (
-    {index, form, data, onClick, onChange, getFiles}: IProductFormElement
+    {index, form, edit, data, onClick, onChange, getFiles}: IProductFormElement
     ): JSX.Element => {
     const [files, setFiles] = useState<File[]>([]);
 
@@ -74,6 +77,22 @@ const ProductForm = (
         setFiles(filtered);
     }
 
+    const setImages = (images: string[]) => {
+        let elems = [];
+        if(edit) {
+            for(let index = 0; index< 4; index++) {
+                    const url = images[index] ? `${process.env.REACT_APP_API_URL}/product/getImage/${form.id}/${images[index]}` : '';
+                    elems.push(<InputImages key={index} url={url} getFile={handleImage} deleteFile={deleteImage} />)
+            }
+            return elems;
+        } else {
+            for(let index = 0; index< 4; index++) {
+                elems.push(<InputImages key={index} url={''} getFile={handleImage} deleteFile={deleteImage} />)
+            }
+            return elems;
+        }
+    }
+
     // const setPreviewImage = (image: File) => {
     //     const reader = new FileReader();
     //     reader.onloadend = () => {
@@ -103,18 +122,16 @@ const ProductForm = (
             event.preventDefault();
             handleChange(getProductForm(event.target.form));
         }} >
-            <Button onClick={ event => {
+            { edit ? '' : <Button onClick={ event => {
                     event.preventDefault();
                     onClick(index);
                 }    
             }
             >x</Button>
+            }
             <FormHeader>
                 <ProductImageInput>
-                    <InputImages getFile={handleImage} deleteFile={deleteImage} />
-                    <InputImages getFile={handleImage} deleteFile={deleteImage} />
-                    <InputImages getFile={handleImage} deleteFile={deleteImage} />
-                    <InputImages getFile={handleImage} deleteFile={deleteImage} />
+                    {setImages(form.imgs)}
                 </ProductImageInput>
                 <ProductInputs>
                     <Input name="name" type="text" placeholder="name" defaultValue={form.name} />

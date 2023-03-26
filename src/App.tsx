@@ -14,14 +14,16 @@ import Main from 'pages/Main/Main';
 import Logout from 'pages/Logout/Logout';
 import PrivateRoutes from 'utils/PrivateRoutes';
 import userEvent from '@testing-library/user-event';
-import { useSelector } from 'react-redux';
-import CreateProducts from 'pages/admin/CreateProducts.ts/CreateProducts';
+import { useDispatch, useSelector } from 'react-redux';
+import CreateProducts from 'pages/admin/CreateProducts/CreateProducts';
 import ProductDetails from 'components/Product/ProductDetails/ProductDetails';
 import Admin from 'pages/admin/Admin';
+import { SET_LANG } from 'redux/constans';
+import Cart from 'pages/Cart/Cart';
 
 const App = (): JSX.Element => {
 
-  const [currentLocale, setCurrentLocale] = useState(getInitialLocale());
+  const dispatch = useDispatch();
 
   const { user } = useSelector( (store: any) => {
     return {
@@ -34,10 +36,19 @@ const App = (): JSX.Element => {
     return savedLocale || LOCALES.ENGLISH
   }
 
+  const [currentLocale, setCurrentLocale] = useState(getInitialLocale());
+
   const handleChange = (lang: string) => {
-    setCurrentLocale(lang)
-    localStorage.setItem('locale', lang)
+    setCurrentLocale(lang);
+    dispatch({type: SET_LANG, payload: lang});
+    localStorage.setItem('locale', lang);
   }
+
+  useEffect( () => {
+    setCurrentLocale(currentLocale);
+    dispatch({type: SET_LANG, payload: currentLocale});
+    localStorage.setItem('locale', currentLocale);
+  }, [dispatch])
 
   const isAuth = user && user.role === 'admin' ? true : false
 
@@ -50,14 +61,16 @@ const App = (): JSX.Element => {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="products" element={<Catalog isAllowed={false} />} />
+                    <Route path="cart" element={<Cart />} />
                     <Route path="products/:id" element={<ProductDetails />} />
                     <Route path="admin" element={<PrivateRoutes children={<Admin />} isAllowed={isAuth} path='/' />} >
-                      <Route path="" element={<CreateProducts />} />
+                      <Route path="" element={<CreateProducts edit={false} />} />
                       <Route path="products" element={<Catalog isAllowed={isAuth} />} />
-                      <Route path="addProducts" element={<CreateProducts />} />
+                      <Route path="products/edit/:id" element={<CreateProducts edit={true} />} />
+                      <Route path="addProducts" element={<CreateProducts edit={false} />} />
                       <Route path="logout" element={<Logout />} />
                       {/* <Route path="registration" element={<Registration />} /> */}
-                      <Route path="*" element={<CreateProducts />} />
+                      <Route path="*" element={<CreateProducts edit={false} />} />
                     </Route>
                     <Route path="login" element={<Login />} />
                     <Route path="*" element={(<h2>Error 404</h2>)} />

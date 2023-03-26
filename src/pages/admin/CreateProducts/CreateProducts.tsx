@@ -37,12 +37,13 @@ type Image = {[key: string]: {files?: File[]}};
 
 export type IProduct = {form: IProductForm, files?: File[]};
 
-const CreateProducts = (): JSX.Element => {
+const CreateProducts = ({edit}: {edit: boolean}): JSX.Element => {
     const [images, setImages] = useState<Image>({})
     const dispatch = useDispatch();
-    const { forms, categories, collections } = useSelector( (store: any) => {
+    const { forms, product, categories, collections } = useSelector( (store: any) => {
         return {
             forms: store.productsForms,
+            product: store.product.product,
             categories: store.setData.categories,
             collections: store.setData.collections,
         }
@@ -76,8 +77,13 @@ const CreateProducts = (): JSX.Element => {
 
         const keys = Object.keys(forms);
         return Array.from(keys).map( key => {
-            return <ProductForm key={key} index={key} form={forms[key]} data={{categories, collections}} onClick={handlerDelete} onChange={handleChange} getFiles={getFiles} />
+            return <ProductForm key={key} index={key} form={forms[key]} edit={false} data={{categories, collections}} onClick={handlerDelete} onChange={handleChange} getFiles={getFiles} />
         })
+    }
+
+    const getForm = (form: any) => {
+        if(!form) return;
+        return <ProductForm form={product} index="0" data={{categories, collections}} edit={true} onClick={handlerDelete} onChange={handleChange} getFiles={getFiles} />
     }
 
     const handleClick = (event: any) => {
@@ -92,7 +98,7 @@ const CreateProducts = (): JSX.Element => {
     }
 
     const handleSubmit = async (event: any) => {
-        event.preventDefault();        
+        event.preventDefault();
         const buff = Object.keys(forms)
         const products: IProduct[] = [];
 
@@ -103,13 +109,26 @@ const CreateProducts = (): JSX.Element => {
         dispatch({type: POST_PRODUCT, payload: products});        
     }
 
+    const handleEdit = async (event: any) => {
+        event.preventDefault();
+        console.log(product)
+        // const buff = Object.keys(forms)
+        // const products: IProduct[] = [];
+
+        // for (const index of buff) {
+        //     products.push({form: forms[index], files: images![index as keyof Image].files})
+        // }
+
+        // dispatch({type: POST_PRODUCT, payload: products});        
+    }
+
     return (
         <CreateProductContainer>
             <ProductsWrapper>
-                {forms ? getForms(forms) : ''}
+                {forms && !edit ? getForms(forms) : getForm(product)}
             </ProductsWrapper>
-            <Button onClick={handleClick} >Add product</Button>
-            <Button onClick={handleSubmit} >Submit</Button>
+            {edit ? '' : <Button onClick={handleClick} >Add product</Button>}
+            {edit ? <Button onClick={handleEdit} >Submit</Button> : <Button onClick={handleSubmit} >Submit</Button>}
         </CreateProductContainer>
     )
 }

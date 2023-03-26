@@ -15,7 +15,7 @@ import {
   Error
 } from './StyleInput'; 
 
-const InputImages = ({getFile, deleteFile}: {getFile: Function, deleteFile: Function}): JSX.Element => {
+const InputImages = ({getFile, deleteFile, url}: {getFile: Function, deleteFile: Function, url: string}): JSX.Element => {
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File>();
 
@@ -45,10 +45,10 @@ const InputImages = ({getFile, deleteFile}: {getFile: Function, deleteFile: Func
 
   return (
     <Section>
-      {image ? (
+      {image || url ? (
         <>
         <ImageBox>
-          <Img src={image} height="200" alt="upload" />
+          <Img src={url ? url : image} height="200" alt="upload" />
           <Button onClick={(e) => deleteHandler(image, e)}>
             delete image
           </Button>

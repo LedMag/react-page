@@ -13,6 +13,11 @@ import {
     DELETE_PRODUCT,
     DELETE_PRODUCT_FORM,
     TOGGLE_FILTER,
+    SET_PRODUCT,
+    GET_CART,
+    SET_CART,
+    DELETE_CART,
+    UPDATE_CART
 } from '../constans';
 
 export const setLang = (payload: any) => ({
@@ -22,6 +27,11 @@ export const setLang = (payload: any) => ({
 
 export const setProducts = (payload: any) => ({
     type: SET_PRODUCTS,
+    payload,
+});
+
+export const setProduct = (payload: any) => ({
+    type: SET_PRODUCT,
     payload,
 });
 
@@ -88,4 +98,23 @@ export const deleteProduct = (payload: number) => ({
 export const toggleFilter = (payload: boolean) => ({
     type: TOGGLE_FILTER,
     payload,
+});
+
+export const getCart = (payload: any) => ({
+    type: GET_CART,
+    payload,
+});
+
+export const setCart = (payload: any) => ({
+    type: SET_CART,
+    payload,
+});
+
+export const updateCart = (payload: any) => ({
+    type: UPDATE_CART,
+    payload,
+});
+
+export const deleteCart = () => ({
+    type: DELETE_CART
 });

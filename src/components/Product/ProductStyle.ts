@@ -10,6 +10,35 @@ export const ProductBtns = styled.div`
     padding: 5px;
     z-index: 9;
   `  
+
+export const Add = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    font-size: 18px;
+
+    &:hover {
+      background-color: red;
+    }
+  `
+
+export const Cancel = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    font-size: 18px;
+
+    &:hover {
+      background-color: grey;
+    }
+  `
+
 export const ProductImage = styled.img`
     opacity: 1;
     height: 100%;
