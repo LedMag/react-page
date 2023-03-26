@@ -9,7 +9,10 @@ export const login = async (data: {email: string, password: string}) => {
     })
     .then( res => res.json())
     .then( cred => {
+        console.log('Token', cred.access_token);
+        
         document.cookie = `token=${cred.access_token}; max-age=${864000}; path=/; samesite=strict;`;
+        console.log('Cookie', document.cookie);
         return {id: cred.id, email: cred.email, role: cred.role};
     })
 }

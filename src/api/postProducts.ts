@@ -1,8 +1,8 @@
-import { IProduct } from '../pages/admin/CreateProducts.ts/CreateProducts'
+import { IProduct } from '../pages/admin/CreateProducts/CreateProducts'
 import { uploadFile } from './uploadFile';
 
 export const postProducts = async (products: IProduct[]) => {
-    const token = document.cookie.split('=')[2];
+    const token = document.cookie.split('=')[1];
     const url = `${process.env.REACT_APP_API_URL}/product/`;
 
     for await (const product of products) {          

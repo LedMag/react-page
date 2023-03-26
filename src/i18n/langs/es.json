@@ -6,6 +6,7 @@
     "addProducts": "Crear",
     "main": "Inicio",
     "products": "Catalogo",
+    "cart": "Carrito",
     "login": "Login",
     "logout": "Logout",
     "registration": "Registración",
@@ -14,5 +15,7 @@
     "name": "Nombre",
     "surname": "Apellido",
     "roles": "Rol",
-    "password_confirmation": "Confirmar contraseña"
+    "password_confirmation": "Confirmar contraseña",
+    "edit": "Editar",
+    "delete": "Eliminar"
 }

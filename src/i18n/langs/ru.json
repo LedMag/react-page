@@ -6,6 +6,7 @@
     "addProducts": "Добавить",
     "main": "Главная",
     "products": "Каталог",
+    "cart": "Корзина",
     "login": "Войти",
     "logout": "Выйти",
     "registration": "Регистрация",
@@ -14,5 +15,7 @@
     "name": "Имя",
     "surname": "Фамилия",
     "role": "Роль",
-    "password_confirmation": "Подтвердите пароль"
+    "password_confirmation": "Подтвердите пароль",
+    "edit": "Edit",
+    "delete": "Delete"
 }

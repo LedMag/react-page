@@ -1,5 +1,5 @@
 export const postFile = async (file: ArrayBuffer, name: string, ext: string, id: string) => {
-    const token = document.cookie.split('=')[2];
+    const token = document.cookie.split('=')[1];
     const url = `${process.env.REACT_APP_API_URL}/product/uploadFile?id=${id}&name=${name}&ext=${ext}`;
     return fetch(url, {
         method: "POST",

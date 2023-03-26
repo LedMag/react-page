@@ -1,6 +1,6 @@
-import { getAllProducts, getProductsByFilter } from "../../api/getProducts";
+import { getAllProducts, getProduct, getProductsByFilter } from "../../api/getProducts";
 import { put, call, all, fork, takeLatest, debounce } from 'redux-saga/effects'
-import { setProducts, setErrors, setLoaderState, setCategories, setCollections, setUser, deleteProductForm } from "redux/actions/actionCreator";
+import { setProducts, setErrors, setLoaderState, setCategories, setCollections, setUser, deleteProductForm, setProduct } from "redux/actions/actionCreator";
 import store from "redux/store";
 import { getAllCategories, getAllCollections } from "api/getData";
 import { login, logout, register } from "api/auth";
@@ -13,6 +13,7 @@ import {
     LOGOUT,
     POST_PRODUCT,
     DELETE_PRODUCT,
+    GET_PRODUCT,
 } from "redux/constans";
 import { postProducts } from "api/postProducts";
 import { deleteProducts } from "api/deleteProducts";
@@ -24,6 +25,17 @@ export function* handlerGetProducts() {
         yield put(setProducts(products));
     } catch (error) {
         yield put(setErrors('Products are not found'));
+    }
+    yield put(setLoaderState(false));
+}
+
+export function* handlerGetProduct(action: any) {
+    yield put(setLoaderState(true));
+    try {
+        const product: Generator = yield call(getProduct, action.payload);
+        yield put(setProduct(product));
+    } catch (error) {
+        yield put(setErrors('Product is not found'));
     }
     yield put(setLoaderState(false));
 }
@@ -72,7 +84,7 @@ export function* handlerGetData() {
         const collections: Generator = yield call(getAllCollections);
         yield put(setCollections(collections));
     } catch (error) {
-        throw new Error('Data is not founded');
+        console.log('Error', error);
     }
 }
 
@@ -83,7 +95,7 @@ export function* handlerLogout() {
         const response: Generator = yield call(logout, token);
         // yield put(setUser({}));
     } catch (error) {
-        throw new Error('Error of logout');
+        console.log('Error', error);
     }
 }
 
@@ -92,7 +104,7 @@ export function* handlerCreateProducts(action: any) {
         const response: Generator = yield call(postProducts, action.payload);
         yield put(deleteProductForm({}));
     } catch (error) {
-        throw new Error('Error of Post Products');
+        console.log('Error', error);
     }
 }
 
@@ -101,13 +113,14 @@ export function* handlerDeleteProducts(action: any) {
         const response: Generator = yield call(deleteProducts, action.payload);
         yield handlerGetProducts();
     } catch (error) {
-        throw new Error('Error of Post Products');
+        console.log('Error', error);
     }
 }
 
 export function* watchProductsSaga() {
     yield debounce(500, GET_PRODUCTS_BY_FILTER, handlerGetProductsByFilter);
     yield takeLatest(GET_ALL_PRODUCTS, handlerGetProducts);
+    yield takeLatest(GET_PRODUCT, handlerGetProduct);
     yield takeLatest(GET_DATA, handlerGetData);
     yield takeLatest(GET_USER, handlerGetUser);
     yield takeLatest(POST_USER, handlerPostUser);
