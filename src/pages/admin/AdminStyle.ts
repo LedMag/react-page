@@ -3,15 +3,12 @@ import { Link as BaseLink } from 'react-router-dom';
 import { colors } from 'theme/colors';
 
 
-export const Container = styled.div`
-
-  @media(min-width: 320px) {
-    width: 100%;
-  }
-
-  @media(min-width: 768px) {
-    
-  }
+export const AdminContainer = styled.div`
+    width: calc(100% - 20px);
+    margin: 10px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 6px -2px rgb(0 0 0);
 `
 
 export const Menu = styled.menu`

@@ -2,6 +2,7 @@
     "admin": "Admin",
     "logout": "Logout",
     "products": "Catalog",
+    "configurations": "Configurations",
     "registration": "Registration",
     "addProducts": "Create",
     "main": "Main",

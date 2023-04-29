@@ -20,6 +20,7 @@ import ProductDetails from 'components/Product/ProductDetails/ProductDetails';
 import Admin from 'pages/admin/Admin';
 import { SET_LANG } from 'redux/constans';
 import Cart from 'pages/Cart/Cart';
+import Configurations from 'pages/admin/Configurations/Configurations';
 
 const App = (): JSX.Element => {
 
@@ -57,24 +58,25 @@ const App = (): JSX.Element => {
       <Container>
         <Router>
           <Header currentLang={currentLocale} setLocale={handleChange} />
-            <main style={{'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center', 'position': 'relative'}}>
-                <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="products" element={<Catalog isAllowed={false} />} />
-                    <Route path="cart" element={<Cart />} />
-                    <Route path="products/:id" element={<ProductDetails />} />
-                    <Route path="admin" element={<PrivateRoutes children={<Admin />} isAllowed={isAuth} path='/' />} >
-                      <Route path="" element={<CreateProducts edit={false} />} />
-                      <Route path="products" element={<Catalog isAllowed={isAuth} />} />
-                      <Route path="products/edit/:id" element={<CreateProducts edit={true} />} />
-                      <Route path="addProducts" element={<CreateProducts edit={false} />} />
-                      <Route path="logout" element={<Logout />} />
-                      {/* <Route path="registration" element={<Registration />} /> */}
-                      <Route path="*" element={<CreateProducts edit={false} />} />
-                    </Route>
-                    <Route path="login" element={<Login />} />
-                    <Route path="*" element={(<h2>Error 404</h2>)} />
-                </Routes>
+          <main style={{'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center', 'position': 'relative'}}>
+              <Routes>
+                  <Route path="/" element={<Main />} />
+                  <Route path="products" element={<Catalog isAllowed={true} />} />
+                  <Route path="cart" element={<Cart />} />
+                  <Route path="products/:id" element={<ProductDetails />} />
+                  <Route path="admin" element={<PrivateRoutes children={<Admin />} isAllowed={true} path='/' />} >
+                    <Route path="" element={<CreateProducts edit={false} />} />
+                    <Route path="products" element={<Catalog isAllowed={true} />} />
+                    <Route path="configurations" element={<Configurations isAllowed={true} />} />
+                    <Route path="products/edit/:id" element={<CreateProducts edit={true} />} />
+                    <Route path="addProducts" element={<CreateProducts edit={false} />} />
+                    <Route path="logout" element={<Logout />} />
+                    {/* <Route path="registration" element={<Registration />} /> */}
+                    <Route path="*" element={<CreateProducts edit={false} />} />
+                  </Route>
+                  <Route path="login" element={<Login />} />
+                  <Route path="*" element={(<h2>Error 404</h2>)} />
+              </Routes>
           </main>
         </Router>
         <Footer />

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreateProducts from 'pages/admin/CreateProducts/CreateProducts';
 import PrivateRoutes from 'utils/PrivateRoutes';
 import Navbar from 'components/Navbar/Navbar';
-import { Li, Menu, Nav, Link, Ul } from './AdminStyle';
+import { AdminContainer, Li, Menu, Nav, Link, Ul } from './AdminStyle';
 import { FormattedMessage } from 'react-intl';
 import Login from 'pages/Login/Login';
 import { SET_LANG } from 'redux/constans';
@@ -17,7 +17,7 @@ const Admin = (): JSX.Element => {
 
     const [currentLocale, setCurrentLocale] = useState(getInitialLocale());
 
-    const links = ["products", "addProducts"/*, "registration"*/, "logout"];
+    const links = ["configurations", "products", "addProducts"/*, "registration"*/, "logout"];
 
     const { user } = useSelector( (store: any) => {
         return {
@@ -54,11 +54,12 @@ const Admin = (): JSX.Element => {
                 </Ul>
             </Nav>
         </Menu>
-        <Container>
+        <AdminContainer>
             <Outlet />
-        </Container>
+        </AdminContainer>
         </>
     );
 }
 
 export default Admin;
+
