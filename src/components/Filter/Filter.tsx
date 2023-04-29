@@ -4,17 +4,28 @@ import { FilterBox, InputName, SelectCategory, SelectCollection, InputMin, Input
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_PRODUCTS_BY_FILTER } from 'redux/constans';
 
-// type Filter = {
-//     name: string,
-//     category: number,
-//     collection: number,
-//     minPrice: number,
-//     maxPrice: number,
-//     order: string,
-// }
+type Filter = {
+    name: string,
+    category: number,
+    collection: number,
+    minPrice: number,
+    maxPrice: number,
+    order: string,
+}
 
-let Filter = ({params: {filters,/* categories, collections*/}, handleChange}: any):JSX.Element => {
+type TypeArg = {
+    params: {
+        filters: any,
+        categories: any[],
+        collections: any[]
+    },
+    handleChange: Function
+}
+
+let Filter = ({params: { filters, categories, collections }, handleChange}: TypeArg):JSX.Element => {
+
     const dispatch = useDispatch();
+    
     const { isOpen } = useSelector( (store: any) => {
         return {
             isOpen: store.toggleFilter,
@@ -37,46 +48,43 @@ let Filter = ({params: {filters,/* categories, collections*/}, handleChange}: an
 
     const form: HTMLFormElement | null = document.querySelector('#filter');
 
-    // const categoryOptions = categories.map( (category: any) => {
-    //     return (
-    //         <option label={category.name} value={category.id} key={category.id} />
-    //     )
-    // });
+    const categoryOptions = categories?.map( (category: any) => {
+        return (
+            <option label={category.name} value={category.id} key={category.id} />
+        )
+    });
 
-    // const collectionOptions = collections.map( (collection: any) => {
-    //     return (
-    //         <option label={collection.name} value={collection.id} key={collection.id} />
-    //     )
-    // });
+    const collectionOptions = collections?.map( (collection: any) => {
+        return (
+            <option label={collection.name} value={collection.id} key={collection.id} />
+        )
+    });
 
     return (
         <FilterBox open={isOpen}
             id='filter' 
             onChange={ (event: any) => {
-                // const formData = form ? new FormData(form) : null;
+                const formData = form ? new FormData(form) : null;
                 handleChange(getFormData(event.target.form));
             }}
         >
-            <label htmlFor={'name'} >Name</label>
-            <InputName name={'name'} defaultValue={filters.name} />
+            <InputName placeholder='Name' name={'name'} defaultValue={filters.name} />
 
-            {/* <label htmlFor={'category'} >Category</label>
+            <label htmlFor={'category'} >Category</label>
             <SelectCategory name={'category'} defaultValue={filters.category} >
                 <option label="-" value={0}></option>
-                {collectionOptions}
-            </SelectCategory> */}
+                {categoryOptions || []}
+            </SelectCategory>
 
-            {/* <label htmlFor={'collection'} >Collection</label>
+            <label htmlFor={'collection'} >Collection</label>
             <SelectCollection name={'collection'} defaultValue={filters.collection} >
                 <option label="-" value={0}></option>
-                {collectionOptions}
-            </SelectCollection> */}
+                {collectionOptions || []}
+            </SelectCollection>
 
-            <label htmlFor={'minPrice'} >Min</label>
-            <InputMin name={'minPrice'} defaultValue={filters.minPrice} />
+            <InputMin placeholder='Min' name={'minPrice'} defaultValue={filters.minPrice} />
             
-            <label htmlFor={'maxPrice'} >Max</label>
-            <InputMax name={'maxPrice'} defaultValue={filters.maxPrice} />
+            <InputMax placeholder='Max' name={'maxPrice'} defaultValue={filters.maxPrice} />
         </FilterBox>
     )
 }

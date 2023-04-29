@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { colors } from 'theme/colors';
+import { styleFilter } from './styleHelpers';
 
 type Open = {open: boolean};
 
 export const FilterBox = styled.form<Open>`
-    padding: 5px;
+    ${ ({open}) => styleFilter(open, colors)}
+    /* padding: 5px;
     
     @media(min-width: 320px) {
         position: absolute;
@@ -14,7 +16,7 @@ export const FilterBox = styled.form<Open>`
         top: 0;
         left: 0;
         background-color: ${colors.blue};
-        z-index: 999;
+        z-index: 9;
     }
 
     @media(min-width: 768px) {
@@ -22,7 +24,7 @@ export const FilterBox = styled.form<Open>`
         width: 100%;
         display: flex;
         background-color: ${colors.blue};
-    }
+    } */
 `
 
 // export const FilterBox = styled.form`

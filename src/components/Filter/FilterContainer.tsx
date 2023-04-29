@@ -8,11 +8,11 @@ import Filter from './Filter';
 const FilterContainer = ():JSX.Element => {
 
     const dispatch = useDispatch();
-    const { filters,/* categories, collections, */error } = useSelector( (store: any) => {
+    const { filters, categories, collections, error } = useSelector( (store: any) => {
         return {
             filters: store.setFilters.filters,
-            // categories: store.setData.categories,
-            // collections: store.setData.collections,
+            categories: store.setData.categories.data,
+            collections: store.setData.collections.data,
             error: store.setErrors.productsError,
         }
     });
@@ -22,12 +22,13 @@ const FilterContainer = ():JSX.Element => {
         dispatch({type: GET_PRODUCTS_BY_FILTER});
     }
 
-    // useEffect( () => {
-    //     dispatch({type: GET_DATA});
-    // }, [dispatch])
+    useEffect( () => {
+        dispatch({type: GET_DATA});
+    }, [dispatch])
     
     return (
-        <Filter params={{filters,/* categories, collections*/}} handleChange={handleChange} />
+        <Filter params={{filters, categories, collections}} handleChange={handleChange} />
+        // Filter( {params: {filters, categories, collections}, handleChange} )
     )
 }
 
