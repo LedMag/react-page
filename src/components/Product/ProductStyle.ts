@@ -21,7 +21,7 @@ export const Add = styled.div`
     font-size: 18px;
 
     &:hover {
-      background-color: red;
+      background-color: green;
     }
   `
 
@@ -31,7 +31,7 @@ export const Cancel = styled.div`
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: green;
+    background-color: red;
     font-size: 18px;
 
     &:hover {

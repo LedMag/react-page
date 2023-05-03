@@ -14,7 +14,7 @@ const Header = ({currentLang, setLocale}: any): JSX.Element | null => {
         { name: 'en', code: LOCALES.ENGLISH },
         { name: 'ru', code: LOCALES.RUSSIAN },
         { name: 'es', code: LOCALES.SPANISH },
-      ]
+    ]
 
     return (
         <HeaderStyled>

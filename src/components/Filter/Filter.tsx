@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { FilterBox, InputName, SelectCategory, SelectCollection, InputMin, InputMax } from './FilterStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_PRODUCTS_BY_FILTER } from 'redux/constans';
+import { InputRange } from 'components/Inputs/InputRange/InputRange';
 
 type Filter = {
     name: string,
@@ -70,21 +71,21 @@ let Filter = ({params: { filters, categories, collections }, handleChange}: Type
         >
             <InputName placeholder='Name' name={'name'} defaultValue={filters.name} />
 
-            <label htmlFor={'category'} >Category</label>
             <SelectCategory name={'category'} defaultValue={filters.category} >
-                <option label="-" value={0}></option>
+                <option label="Category" value={0}></option>
                 {categoryOptions || []}
             </SelectCategory>
 
-            <label htmlFor={'collection'} >Collection</label>
             <SelectCollection name={'collection'} defaultValue={filters.collection} >
-                <option label="-" value={0}></option>
+                <option label="Collection" value={0}></option>
                 {collectionOptions || []}
             </SelectCollection>
 
-            <InputMin placeholder='Min' name={'minPrice'} defaultValue={filters.minPrice} />
+            <InputRange />
+
+            {/* <InputMin placeholder='Min' name={'minPrice'} defaultValue={filters.minPrice} />
             
-            <InputMax placeholder='Max' name={'maxPrice'} defaultValue={filters.maxPrice} />
+            <InputMax placeholder='Max' name={'maxPrice'} defaultValue={filters.maxPrice} /> */}
         </FilterBox>
     )
 }
