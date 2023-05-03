@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaMob } from 'pages/admin/Configurations/ConfigurationsStyle';
 
 export const Form = styled.form`
     width: 250px;
@@ -20,9 +21,12 @@ export const Button = styled.button`
     cursor: pointer;
     background-color: light-grey;
 
+
+    ${mediaMob('font-size', '20px')};
+
     @media(min-width: 320px) {
         padding: 10px;
-        font-size: 20px;
+        /* font-size: 20px; */
         border-radius: 5px;
     }
 

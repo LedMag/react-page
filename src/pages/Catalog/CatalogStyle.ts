@@ -18,6 +18,7 @@ export const CatalogBox = styled.div`
 `
 
 export const ProductBox = styled.div`
+    padding: 5px;
     @media(min-width: 320px) {
         width: 150px;
         height: 150px;
