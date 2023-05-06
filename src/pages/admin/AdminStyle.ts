@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link as BaseLink } from 'react-router-dom';
 import { colors } from 'theme/colors';
+import { mediaMob } from "utils/FuncHelpers";
 
 
 export const AdminContainer = styled.div`
@@ -43,12 +44,13 @@ export const Li = styled.li`
     align-items: center;
     padding: 5px 0;
 `
-
+//admin menu links
 export const Link = styled(BaseLink)`
-    font-family: 'Ghotic';
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     opacity: 0.8;
     text-decoration: none;
-    font-size: 16px;
+    ${mediaMob('font-size', '13px')};
+    ${mediaMob('margin', '1px')};
     line-height: 16px;
     color: ${colors.black};
 

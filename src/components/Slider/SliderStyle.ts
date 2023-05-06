@@ -11,7 +11,6 @@ export const SliderContainer = styled.div`
     align-items: center;
     padding-top: 5px;
     padding-bottom: 5px;
-}
 `
 
 export const Next = styled.div`  

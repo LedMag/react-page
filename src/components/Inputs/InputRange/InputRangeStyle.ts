@@ -1,6 +1,6 @@
-import { mediaMob } from "pages/admin/Configurations/ConfigurationsStyle";
 import styled from "styled-components";
 import { colors } from "theme/colors";
+import { mediaMob } from "utils/FuncHelpers";
 
 export const InputRangeContainer = styled.div`
     display: flex;
@@ -19,12 +19,14 @@ export const InputRangeContainer = styled.div`
 
 export const InputMin = styled.input`
     width: 20%;
+    ${mediaMob('height', '20px')};
     border: none;
     ${mediaMob('border-radius', '5px 0 0 5px')};
 `
             
 export const InputMax = styled.input`
     width: 20%;
+    ${mediaMob('height', '20px')};
     border: none;
     ${mediaMob('border-radius', '0 5px 5px 0')};
 `
@@ -44,8 +46,8 @@ export const Line = styled.div`
 `
 
 export const RangeButton = styled.button`
-    height: 20px;
-    width: 26px;
+    ${mediaMob('height', '18px')};
+    ${mediaMob('width', '31px')};
     border-radius: 50%;
     border: 2px ${colors.darkBlue} solid;
     cursor: pointer;

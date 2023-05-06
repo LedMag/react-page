@@ -1,6 +1,6 @@
-import { mediaAll, mediaMob } from 'pages/admin/Configurations/ConfigurationsStyle';
 import styled from 'styled-components';
 import { colors } from 'theme/colors';
+import { mediaMob } from 'utils/FuncHelpers';
 import { styleFilter } from './styleHelpers';
 
 

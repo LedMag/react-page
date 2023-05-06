@@ -1,31 +1,20 @@
 import styled from "styled-components";
 import ReactDropdown from 'react-dropdown';
+import { mediaMob } from "utils/FuncHelpers";
+import { colors } from "theme/colors";
 
 export const Dropdown = styled(ReactDropdown)`
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background: ${colors.blue};
+    height: 30px;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    ${mediaMob('border-radius','15%')};
+    border: 2px solid gray;
 `
 
 export const Options = styled.select`
-    
 `
-// .is-open {
-
-// }
-
-// .is-selected {
-
-// }
-
-// <div class="Dropdown-root sc-iqPaeV isMTLp ">
-//     <div class="Dropdown-control" aria-haspopup="listbox">
-//         <div class="Dropdown-placeholder ">Español</div>
-//         <div class="Dropdown-arrow-wrapper">
-//             <span class="Dropdown-arrow"></span>
-//         </div>
-//     </div>
-//     <div class="Dropdown-menu" aria-expanded="true">
-//         <div class="Dropdown-option" roles="option" aria-selected="false">English</div>
-//         <div class="Dropdown-option" roles="option" aria-selected="false">Русский</div>
-//         <div class="Dropdown-option is-selected" role="option" aria-selected="true">Español</div>
-//         </div>
-//     </div>
-// </div>
