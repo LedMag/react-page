@@ -85,9 +85,10 @@ export const RangeInputMin = styled.input`
         -webkit-appearance: none;
         box-shadow: 0 0 6px rgba(0,0,0,0.05);
         cursor: pointer;
+        border: 1px white solid;
 
         &:hover {
-            background-color: ${colors.blue};
+            background-color: lightblue;
         }
 
     }
@@ -125,7 +126,13 @@ export const RangeInputMax = styled.input`
         background: #17A2B8;       
         pointer-events: auto;
         -webkit-appearance: none;
-        box-shadow: 0 0 6px rgba(0,0,0,0.05);  
+        box-shadow: 0 0 6px rgba(0,0,0,0.05); 
+        cursor: pointer;
+        border: 1px white solid;
+
+        &:hover {
+            background-color: lightblue;
+        } 
     }
     &::-moz-range-thumb{
         height: 17px;

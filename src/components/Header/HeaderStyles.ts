@@ -5,6 +5,7 @@ import logoSmall from '../../utils/images/logo-small.png';
 
 export const HeaderStyled = styled.header`
     width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

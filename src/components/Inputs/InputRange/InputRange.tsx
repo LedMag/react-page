@@ -5,7 +5,7 @@ import { setFilters } from 'redux/actions/actionCreator';
 
 const RANGE_SETTINGS = {
     priceGap: 1,
-    max: 99,
+    max: 50,
     min: 0
 }
 
@@ -28,13 +28,13 @@ export const InputRange = (): JSX.Element => {
     const handlerInputMax = (e: any) => {
         if(((e.target.value - range.min) < RANGE_SETTINGS.priceGap) || e.target.value > RANGE_SETTINGS.max) return;
         setRange({...range, max: e.target.value || RANGE_SETTINGS.max});
-        setLength({...length, right: 100 - (range.max / 99) * 100});
+        setLength({...length, right: 100 - (range.max / RANGE_SETTINGS.max) * 100});
     }
 
     const handlerInputMin = (e: any) => {
         if(((range.max - e.target.value) < RANGE_SETTINGS.priceGap) || e.target.value < RANGE_SETTINGS.min) return;
         setRange({...range, min: e.target.value || RANGE_SETTINGS.min});
-        setLength({...length, left: (range.min / 98) * 100});
+        setLength({...length, left: (range.min / (RANGE_SETTINGS.max - RANGE_SETTINGS.priceGap)) * 100});
     }
 
     return (

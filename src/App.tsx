@@ -61,7 +61,7 @@ const App = (): JSX.Element => {
           <main>
               <Routes>
                   <Route path="/" element={<Main />} />
-                  <Route path="products" element={<Catalog isAllowed={true} />} />
+                  <Route path="products" element={<Catalog isAllowed={false} />} />
                   <Route path="cart" element={<Cart />} />
                   <Route path="products/:id" element={<ProductDetails />} />
                   <Route path="admin" element={<PrivateRoutes children={<Admin />} isAllowed={true} path='/' />} >
