@@ -11,6 +11,8 @@ import {
     ProductHover,
     ProductImage,
     ProductInfo,
+    ProductName,
+    ProductPrice,
     Delete,
  } from './ProductStyle';
 import { IProduct } from './ProductTypes';
@@ -56,23 +58,17 @@ const Product = ({product, isAllowed}: { product: IProduct, isAllowed: boolean})
 
     return (
         <NavLink to={"/products/" + product.id} key={product.id} state={product.id} >
-            {/* <ProductImage src={`${process.env.REACT_APP_API_URL}/product/getImage/${product.id}/${product.img_url}`} alt={product.name} />
-             */}
             <ProductImage src={product.img_url} alt={product.name} />
             <ProductHover>
                 <ProductInfo>
-                    <p className="product__name">{product.name}</p>
-                    <p className="product__price">€ {product.price}</p>
+                    <ProductName>{product.name}</ProductName>
+                    <ProductPrice>{product.price}€</ProductPrice>
                 </ProductInfo>
                 <ProductBtns>
                     {checked ? <Cancel onClick={handlerDecrementCart}>Cancel</Cancel> : <Add onClick={handlerSetCart}>Add</Add>}
+                    {isAllowed ? <Delete onClick={handlerDelete}><FormattedMessage id={"delete"} /></Delete> : ''}
                 </ProductBtns>
             </ProductHover>
-            {
-                isAllowed ?
-                <Delete onClick={handlerDelete}><FormattedMessage id={"delete"} /></Delete> :
-                ''
-            }
         </NavLink>
     )
 }

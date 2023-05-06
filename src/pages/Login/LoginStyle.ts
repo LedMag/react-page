@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mediaMob } from 'pages/admin/Configurations/ConfigurationsStyle';
+import { mediaMob } from 'utils/FuncHelpers';
 
 export const Form = styled.form`
     width: 250px;
@@ -7,6 +7,7 @@ export const Form = styled.form`
     padding: 10px 0;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
 `
 
 export const Input = styled.input`

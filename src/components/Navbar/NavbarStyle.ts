@@ -1,6 +1,7 @@
 import { NavLink as BaseNavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from 'theme/colors';
+import { mediaMob } from 'utils/FuncHelpers';
 
 type Open = {open: boolean};
 type HasSearch =  {hasSearch: boolean};
@@ -93,6 +94,7 @@ export const Button = styled.div<Open>`
 `
 
 export const Nav = styled.nav<Open>`
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     @media(min-width: 320px) {
         display: ${ ({open}) => open ? 'flex' : 'none'};
         position: absolute;
@@ -139,13 +141,16 @@ export const Li = styled.li`
         margin-left: 10px;
     }
 `
-
+//меню links
 export const NavLink = styled(BaseNavLink)`
+    ${mediaMob('font-size', '13px')};
+    ${mediaMob('margin', '1px')};
+    font-weight: 500;
+    
     @media(min-width: 320px) {
-        font-family: 'Ghotic';
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         opacity: 0.8;
         text-decoration: none;
-        font-size: 16px;
         line-height: 16px;
         color: ${colors.black};
     

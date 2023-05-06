@@ -58,7 +58,7 @@ const App = (): JSX.Element => {
       <Container>
         <Router>
           <Header currentLang={currentLocale} setLocale={handleChange} />
-          <main style={{'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center', 'position': 'relative'}}>
+          <main>
               <Routes>
                   <Route path="/" element={<Main />} />
                   <Route path="products" element={<Catalog isAllowed={true} />} />

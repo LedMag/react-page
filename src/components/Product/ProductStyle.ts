@@ -1,113 +1,121 @@
 import { NavLink as BaseNavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+
+//карточка с продуктом
+export const NavLink = styled(BaseNavLink)`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  color: black;
+`
+
+//изображение карточки
+export const ProductImage = styled.img`
+  position: absolute;
+  top: 0px;
+  opacity: 1;
+  height: 70%;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  object-fit: cover;
+`
+
+//блок с описанием и кнопками
+export const ProductHover = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: .5s ease;
+  width: 100%;
+  height: 30%;
+  z-index: 10;
+`
+
+//блок с описанием и ценой
+export const ProductInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  height: 50%;
+  width: 100%;
+`
+
+//имя продукта
+export const ProductName = styled.span`
+  height: 100%;
+  width: 60%;
+`
+//цена продукта
+export const ProductPrice = styled.span`
+  height: 100%;
+  width: 40%;
+  font-size: 18px;
+  text-align: right;
+`
+
+//блок кнопок карточки
 export const ProductBtns = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    bottom: 0;
-    left: 0;
-    padding: 5px;
-    z-index: 9;
-  `  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  z-index: 9;
+  height: 50%;
+` 
 
-export const Add = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    background-color: blue;
-    font-size: 18px;
+//кнопка добавить
+export const Add = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  background-color: gray;
+  font-size: 18px;
 
-    &:hover {
-      background-color: green;
-    }
-  `
+  &:hover {
+    background-color: darkgray;
+  }
+`
+//кнопка удалить
+export const Delete = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  font-size: 18px;
+  color: red;
+  background-color: gray;
+
+  &:hover{
+    background-color: darkgray;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`
 
 export const Cancel = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
-    background-color: red;
+    width: 40%;
+    height: 100%;
+    background-color: gray;
     font-size: 18px;
 
     &:hover {
-      background-color: grey;
-    }
-  `
-
-export const ProductImage = styled.img`
-    opacity: 1;
-    height: 100%;
-    transition: .5s ease;
-    backface-visibility: hidden;
-    object-fit: cover;
-  `
-
-export const ProductInfo = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(176, 176, 176, 0.7);
-    padding: 5px;
-    color: white;
-  `
-
-export const ProductName = styled.div`
-`
-  
-export const ProductHover = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: .5s ease;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9;
-  `
-  export const NavLink = styled(BaseNavLink)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    cursor: pointer;
-
-    &:hover {
-      ${ProductHover} {
-        opacity: 1;
-      }
-      ${ProductImage} {
-        opacity: 0.3;
-      }
-    }
-  `
-
-  export const Delete = styled.button`
-    padding: 5px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: pink;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 99;
-
-    &:hover{
-      background-color: red;
-    }
-
-    &:active {
-      transform: scale(0.95);
+      background-color: darkgray;
     }
   `
