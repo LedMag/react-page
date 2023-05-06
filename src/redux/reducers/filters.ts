@@ -3,10 +3,10 @@ import { SET_FILTERS, TOGGLE_FILTER } from "redux/constans";
 const initialState = {
     filters: {
         name: '',
-        // category: 0,
-        // collection: 0,
+        category: 0,
+        collection: 0,
         minPrice: 0,
-        maxPrice: 999,
+        maxPrice: 99,
         order: 'asc'
     }
 }
