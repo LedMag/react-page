@@ -1,42 +1,53 @@
-import React, { useEffect } from 'react';
-import { InputMax, InputMin, InputRangeContainer, Line, RangeBox, RangeButton } from './InputRangeStyle';
+import React, { useEffect, useState } from 'react';
+import { InputMax, InputMin, InputRangeContainer, Line, Range, RangeBox, RangeInputMin, RangeInputMax } from './InputRangeStyle';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilters } from 'redux/actions/actionCreator';
+
+const RANGE_SETTINGS = {
+    priceGap: 1,
+    max: 99,
+    min: 0
+}
 
 export const InputRange = (): JSX.Element => {
 
-    useEffect( () => {
-        window.addEventListener('mousemove', handlerMousemove);
+    const dispatch = useDispatch();
 
-        return () => {
-            window.removeEventListener('mousemove', handlerMousemove);
+    const { filters } = useSelector( (store: any) => {
+        return {
+            filters: store.setFilters.filters,
         }
-    }, []);
+    });
+    const [range, setRange] = useState({min: RANGE_SETTINGS.min, max: RANGE_SETTINGS.max});
+    const [length, setLength] = useState({left: 0, right: 0});
 
-    const handlerMousemove = (e: any) => {
-        console.log(e.x);
+    useEffect( () => {
+        dispatch(setFilters({...filters, minPrice: range.min, maxPrice: range.max}))
+    }, [range])
+
+    const handlerInputMax = (e: any) => {
+        if(((e.target.value - range.min) < RANGE_SETTINGS.priceGap) || e.target.value > RANGE_SETTINGS.max) return;
+        setRange({...range, max: e.target.value || RANGE_SETTINGS.max});
+        setLength({...length, right: 100 - (range.max / 99) * 100});
     }
 
-    const handlerClickMin = (e: any) => {
-        e.preventDefault();
-
-        console.log(e);
-    };
-
-    const handlerClickMax = (e: any) => {
-        e.preventDefault();
-        console.log(e);
-    };
+    const handlerInputMin = (e: any) => {
+        if(((range.max - e.target.value) < RANGE_SETTINGS.priceGap) || e.target.value < RANGE_SETTINGS.min) return;
+        setRange({...range, min: e.target.value || RANGE_SETTINGS.min});
+        setLength({...length, left: (range.min / 98) * 100});
+    }
 
     return (
         <InputRangeContainer>
-            <InputMin maxLength={4}  placeholder='Min' name={'minPrice'} defaultValue={0} />
-            
+            <InputMin onInput={handlerInputMin} maxLength={4}  placeholder='Min' name={'minPrice'} value={range.min} />
             <RangeBox>
-                <Line />
-                <RangeButton onClick={handlerClickMin} />
-                <RangeButton onClick={handlerClickMax} />
+                <Line>
+                    <Range length={length}/>
+                </Line>
+                <RangeInputMin type='range' onInput={handlerInputMin} min={RANGE_SETTINGS.min} max={RANGE_SETTINGS.max - RANGE_SETTINGS.priceGap} value={range.min} step={RANGE_SETTINGS.priceGap} />
+                <RangeInputMax type="range" onInput={handlerInputMax} min={RANGE_SETTINGS.min + RANGE_SETTINGS.priceGap} max={RANGE_SETTINGS.max} value={range.max} step={RANGE_SETTINGS.priceGap} />
             </RangeBox>
-
-            <InputMax maxLength={4} placeholder='Max' name={'maxPrice'} defaultValue={0} />
+            <InputMax onInput={handlerInputMax} maxLength={4} placeholder='Max' name={'maxPrice'} value={range.max} />
         </InputRangeContainer>
     )
 }
