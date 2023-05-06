@@ -21,28 +21,6 @@ export const ConfigurationsContainer = styled.div`
 // `
 
 
-export const ConfigCollection = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  ${mediaMob('height', '50px')};
-  ${mediaMob('margin-bottom', '10px')};
-  ${mediaMob('border-radius', '15px')};
-  background-color: ${colors.blue};
-`
-
-export const ConfigCategory = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  ${mediaMob('height', '50px')};
-  ${mediaMob('margin-bottom', '10px')};
-  ${mediaMob('border-radius', '15px')}
-  background-color: ${colors.blue};
-`
-
 export const ConfigSlide = styled.div`
   display: flex;
   justify-content: center;

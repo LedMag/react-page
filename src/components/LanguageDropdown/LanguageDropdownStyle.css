@@ -1,0 +1,31 @@
+.Dropdown-root {
+    /* background-color: green; */
+}
+
+.is-open {
+    /* background: none; */
+    border-radius: 5px;
+    height: 120px;
+
+
+}
+
+.Dropdown-control {
+}
+
+.Dropdown-menu {
+    /* background-color: blueviolet; */
+    padding-top: 4px;
+}
+
+.Dropdown-option {
+    border: 1px solid gray;
+    display: flex;
+    height: 30px;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.Dropdown-option:last-child{
+    border-radius: 0 0 15% 15%;
+}
