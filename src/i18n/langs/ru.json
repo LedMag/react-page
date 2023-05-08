@@ -18,5 +18,9 @@
     "role": "Роль",
     "password_confirmation": "Подтвердите пароль",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "collection": "Коллекция",
+    "category": "Категория",
+    "description": "Описание",
+    "price": "Цена"
 }

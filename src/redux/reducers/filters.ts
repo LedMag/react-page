@@ -7,7 +7,7 @@ const initialState = {
         collection: 0,
         minPrice: 0,
         maxPrice: 99,
-        order: 'asc'
+        order: 'ASC'
     }
 }
 

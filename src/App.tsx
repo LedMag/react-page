@@ -61,14 +61,14 @@ const App = (): JSX.Element => {
           <main>
               <Routes>
                   <Route path="/" element={<Main />} />
-                  <Route path="products" element={<Catalog isAllowed={false} />} />
+                  <Route path="products" element={<Catalog isAllowed={isAuth} />} />
                   <Route path="cart" element={<Cart />} />
                   <Route path="products/:id" element={<ProductDetails />} />
-                  <Route path="admin" element={<PrivateRoutes children={<Admin />} isAllowed={true} path='/' />} >
+                  <Route path="admin" element={<PrivateRoutes children={<Admin />} isAllowed={isAuth} path='/' />} >
                     <Route path="" element={<CreateProducts edit={false} />} />
-                    <Route path="products" element={<Catalog isAllowed={true} />} />
-                    <Route path="configurations" element={<Configurations isAllowed={true} />} />
-                    <Route path="products/edit/:id" element={<CreateProducts edit={true} />} />
+                    <Route path="products" element={<Catalog isAllowed={isAuth} />} />
+                    <Route path="configurations" element={<Configurations isAllowed={isAuth} />} />
+                    <Route path="products/edit/:id" element={<CreateProducts edit={isAuth} />} />
                     <Route path="addProducts" element={<CreateProducts edit={false} />} />
                     <Route path="logout" element={<Logout />} />
                     {/* <Route path="registration" element={<Registration />} /> */}

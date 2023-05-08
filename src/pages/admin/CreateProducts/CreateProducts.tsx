@@ -13,10 +13,10 @@ import {
 
  interface IProductForm {
     name: string,
-    price: string,
+    price: number,
     // image: string,
-    // category: string,
-    // collection: string,
+    category: number,
+    collection: number,
     description_en: string,
     description_es: string,
     description_ru: string,
@@ -24,10 +24,10 @@ import {
 
 const INITIAL_PRODUCT_FORM = {
     name: '',
-    price: '',
+    price: 0,
     // image: '',
-    // category: '',
-    // collection: '',
+    category: 0,
+    collection: 0,
     description_en: '',
     description_es: '',
     description_ru: '',
@@ -40,14 +40,20 @@ export type IProduct = {form: IProductForm, files?: File[]};
 const CreateProducts = ({edit}: {edit: boolean}): JSX.Element => {
     const [images, setImages] = useState<Image>({})
     const dispatch = useDispatch();
+
     const { forms, product, categories, collections } = useSelector( (store: any) => {
         return {
             forms: store.productsForms,
-            product: store.product.product,
+            product: store.product.product.data as IProduct,
             categories: store.setData.categories,
             collections: store.setData.collections,
         }
     });
+
+    useEffect( () => {
+        if(edit) return;
+        dispatch(deleteProductForm({}));
+    },[])
 
     const handlerDelete = (index: string) => {
         const keys = Object.keys(forms);
@@ -81,9 +87,9 @@ const CreateProducts = ({edit}: {edit: boolean}): JSX.Element => {
         })
     }
 
-    const getForm = (form: any) => {
-        if(!form) return;
-        return <ProductForm form={product} index="0" data={{categories, collections}} edit={true} onClick={handlerDelete} onChange={handleChange} getFiles={getFiles} />
+    const getForm = (product: any) => {
+        if(!product) return;
+        return <ProductForm form={product} index="0" data={{categories, collections}} edit={edit} onClick={handlerDelete} onChange={handleChange} getFiles={getFiles} />
     }
 
     const handleClick = (event: any) => {
@@ -125,7 +131,7 @@ const CreateProducts = ({edit}: {edit: boolean}): JSX.Element => {
     return (
         <CreateProductContainer>
             <ProductsWrapper>
-                {forms && !edit ? getForms(forms) : getForm(product)}
+                {!edit ? getForms(forms) : getForm(product)}
             </ProductsWrapper>
             {edit ? '' : <Button onClick={handleClick} >Add product</Button>}
             {edit ? <Button onClick={handleEdit} >Submit</Button> : <Button onClick={handleSubmit} >Submit</Button>}

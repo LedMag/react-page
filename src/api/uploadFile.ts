@@ -1,6 +1,8 @@
-export const postFile = async (file: ArrayBuffer, name: string, ext: string, id: string) => {
+export const postFile = async (file: ArrayBuffer, name: string, ext: string, id: number) => {
+    console.log("postFile", {id});
+    
     const token = document.cookie.split('=')[1];
-    const url = `${process.env.REACT_APP_API_URL}/product/uploadFile?id=${id}&name=${name}&ext=${ext}`;
+    const url = `${process.env.REACT_APP_API_URL}/products/uploadFile?id=${id}&name=${name}&ext=${ext}`;
     return fetch(url, {
         method: "POST",
         headers: {
@@ -13,7 +15,9 @@ export const postFile = async (file: ArrayBuffer, name: string, ext: string, id:
     })
 }
 
-export const uploadFile = (file: File, id: string, name: string) => {
+export const uploadFile = (file: File, id: number, name: string) => {
+    console.log("uploadFile", {id});
+    
     const ext = file.name.split('.').pop() ?? 'png';
     const rf = new FileReader();
 

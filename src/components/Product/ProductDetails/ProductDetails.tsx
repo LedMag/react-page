@@ -2,41 +2,47 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ProductBox, ProductImages, ProductImage, ProductInfo, ProductImageView, Buttons, Editar, Delete } from './ProductDetailsStyle';
 import { IProduct } from '../ProductTypes';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_PRODUCT } from 'redux/constans';
-import { deleteProduct } from 'redux/actions/actionCreator';
+import noImage from 'utils/images/no-photo-available.png';
+import { deleteProduct, setLoaderState } from 'redux/actions/actionCreator';
 
 const ProductDetails = (/* {product}: { product: IProduct} */): JSX.Element => {
 
-    const dispatch = useDispatch();
     const { id } = useParams();
-    const [selected, setSelected] = useState('');
 
-    useEffect( () => {
-        dispatch({type: GET_PRODUCT, payload: id});
-    }, [dispatch]);
-
-    const { product, isAuth, error, isLoading } = useSelector( (store: any) => {
+    const { product, lang, isAuth } = useSelector( (store: any) => {
         return {
-            product: store.product.product as IProduct,
-            error: store.setErrors.productError,
-            isLoading: store.loader.isLoadingData,
+            product: store.product.product.data as IProduct,
             lang: store.lang,
+            isLoader: store.loader.isLoader,
             isAuth: store.setUser && store.setUser.role === 'admin' ? true : false
         }
     });
 
+    const dispatch = useDispatch();
+    const [selected, setSelected] = useState('');
+    const [loading, setLoading] = useState(true);
+
     useEffect( () => {
-        setActiveImg(null)
+        dispatch(setLoaderState(true));
+        dispatch({type: GET_PRODUCT, payload: id});
+    }, [dispatch]);
+
+    useEffect( () => {
+        if(!product) return;
+        setLoading(false);
+        setSelected(product.img_url);
+        setActiveImg(null);
     }, [product]);
     
     const renderImages = (): Array<JSX.Element> | undefined => {
-        const url = `${process.env.REACT_APP_API_URL}/product/getImage/${id}/`;
+        const url = `${process.env.REACT_APP_API_URL}/products/getImage/${id}/`;
         if(!product.imgs) return;
         const imagesList: Array<JSX.Element> = product.imgs
         .map( (image: string, index: number) => {
-            return <ProductImage key={index} src={url+image} alt={product.name} onClick={setActiveImg} className='product__img'/>
+            return <ProductImage key={index} src={`${url}${image || ""}`} alt={product.name} onClick={setActiveImg} className='product__img'/>
         })
         return imagesList;
     }
@@ -65,12 +71,13 @@ const ProductDetails = (/* {product}: { product: IProduct} */): JSX.Element => {
     const getDescription = () => {
         const lang = localStorage.getItem('locale');
         const key: string = `description_` + (lang ? lang.slice(0, 2) : 'en');
-        const description = product[key as keyof IProduct];
+        const description: string = product[key as keyof IProduct] as string;
         return description;
     }
 
     return (
-        <ProductBox>
+        <>
+        {loading ? <div>Product is loading...</div> : <ProductBox>
             {
                 isAuth ?
                 <Buttons>
@@ -79,18 +86,20 @@ const ProductDetails = (/* {product}: { product: IProduct} */): JSX.Element => {
                 </Buttons>
                 : ''
             }
-            <ProductImageView src={selected} alt={product.name} />
+            {product.imgs?.length ? <ProductImageView src={selected} alt={product.name} /> : <ProductImageView src={noImage} alt={product.name} />}
             <ProductImages>
                 {renderImages()}
             </ProductImages>
             <ProductInfo>
-                <p className="product__name">{product.name}</p>
-                <p className="product__price">€ {product.price}</p>
-                {/* <p className="product__price">{product.category}</p>
-                <p className="product__price">{product.collection}</p> */}
-                {getDescription() ? <p className="product__description">{getDescription()}</p> : ""}                
+                <p className="product__name"><FormattedMessage id={"name"} />: {product.name}</p>
+                <p className="product__price"><FormattedMessage id={"price"} />: {product.price}€</p>
+                <p className="product__category"><FormattedMessage id={"category"} />: {product.category.name}</p>
+                <p className="product__collection"><FormattedMessage id={"collection"} />: {product.collection.name}</p>
+                {getDescription() ? <p className="product__description"><FormattedMessage id={"description"} />: {getDescription()}</p> : ""}                
             </ProductInfo>
         </ProductBox>
+        }
+        </>
     )
 }
 

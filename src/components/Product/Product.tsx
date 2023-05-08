@@ -1,8 +1,8 @@
-import { getImage } from 'api/getProducts';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { deleteProduct, setCart, updateCart } from 'redux/actions/actionCreator';
+import noImage from 'utils/images/no-photo-available.png';
 import {
     NavLink,
     ProductBtns,
@@ -58,7 +58,8 @@ const Product = ({product, isAllowed}: { product: IProduct, isAllowed: boolean})
 
     return (
         <NavLink to={"/products/" + product.id} key={product.id} state={product.id} >
-            <ProductImage src={product.img_url} alt={product.name} />
+            {product.img_url ? <ProductImage src={`${process.env.REACT_APP_API_URL}/products/getImage/${product.id}/${product.img_url}`} alt={product.name} /> : 
+            <ProductImage src={noImage} alt={product.name} /> }
             <ProductHover>
                 <ProductInfo>
                     <ProductName>{product.name}</ProductName>

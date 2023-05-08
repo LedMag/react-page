@@ -18,5 +18,9 @@
     "roles": "Rol",
     "password_confirmation": "Confirmar contraseña",
     "edit": "Editar",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "collection": "Colección",
+    "category": "Categoría",
+    "description": "Descripción",
+    "price": "Precio"
 }
