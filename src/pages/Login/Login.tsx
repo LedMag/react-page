@@ -7,7 +7,7 @@ import { GET_USER } from 'redux/constans';
 import { Form, Input, Label, Button } from './LoginStyle';
 
 const Login = (): JSX.Element => {
-    const form: HTMLFormElement | null = document.querySelector('#login');
+    const form: HTMLFormElement = document.querySelector('#login') as HTMLFormElement;
 
     const dispatch = useDispatch();
 
@@ -34,7 +34,7 @@ const Login = (): JSX.Element => {
     const handleSubmit = () => {
         dispatch({type: GET_USER});
         dispatch(setLoginForm({email: '', password: ''}));
-        form?.reset();
+        form.reset();
     }
 
     return (

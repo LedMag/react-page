@@ -109,7 +109,7 @@ const CategoryForm = (
             <Button>x</Button>
             <FormHeader>
                 <CategoryImageInput>
-                    <InputImages key={1} url={""} getFile={handleImage} deleteFile={deleteImage} />
+                    <InputImages key={1} edit={false} url={""} getFile={handleImage} deleteFile={deleteImage} />
                 </CategoryImageInput>
                 <CategoryInputs>
                     <Input name="name" type="text" placeholder="name" defaultValue={form.name} />

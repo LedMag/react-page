@@ -15,7 +15,7 @@ import {
   Error
 } from './StyleInput'; 
 
-const InputImages = ({getFile, deleteFile, url}: {getFile: Function, deleteFile: Function, url: string}): JSX.Element => {
+const InputImages = ({edit, getFile, deleteFile, url}: {edit: boolean, getFile: Function, deleteFile: Function, url: string}): JSX.Element => {
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File>();
 
@@ -25,6 +25,12 @@ const InputImages = ({getFile, deleteFile, url}: {getFile: Function, deleteFile:
       getFile(file);
     }
   }, [file])
+
+  useEffect( () => {
+    if(url) {
+      setImage(url);
+    }
+  }, [])
 
   const onSelectFile = (event: any) => {
     setFile(event.target.files[0]);
@@ -38,17 +44,24 @@ const InputImages = ({getFile, deleteFile, url}: {getFile: Function, deleteFile:
   }
 
   function deleteHandler(image: string, e: any) {
+    e.preventDefault();
     setImage('');
-    deleteFile(file?.name);
-    URL.revokeObjectURL(image);
+    if(file?.name) {
+      deleteFile(file.name);
+      URL.revokeObjectURL(image);
+      return;
+    }
+    const arr = url.split("/");
+    const name = arr[arr.length - 1];
+    deleteFile(name);
   }
 
   return (
     <Section>
-      {image || url ? (
+      {image ? (
         <>
         <ImageBox>
-          <Img src={url ? url : image} height="200" alt="upload" />
+          <Img src={image} height="200" alt="upload" />
           <Button onClick={(e) => deleteHandler(image, e)}>
             delete image
           </Button>

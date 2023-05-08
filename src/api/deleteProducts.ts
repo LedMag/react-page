@@ -1,6 +1,6 @@
 export const deleteProducts = async (id: number) => {
     const token = document.cookie.split('=')[1];
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/product/delete/${id}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/products/delete/${id}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -11,7 +11,7 @@ export const deleteProducts = async (id: number) => {
 
 export const deleteProductsFromTrash = async (id: number) => {
     const token = document.cookie.split('=')[1];
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/product/${id}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/products/${id}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`

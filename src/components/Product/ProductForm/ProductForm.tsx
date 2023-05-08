@@ -12,16 +12,17 @@ import {
     Input,
     Textarea,
     Button,
+    Select,
 } from './ProductFormStyle';
 
 interface IProductForm {
     id?: number,
     name: string,
-    price: string,
-    image: string,
+    price: number,
+    img_url: string,
     imgs: string[],
-    category: string,
-    collection: string,
+    category: number,
+    collection: number,
     description_en: string,
     description_es: string,
     description_ru: string,
@@ -42,6 +43,10 @@ const ProductForm = (
     ): JSX.Element => {
     const [files, setFiles] = useState<File[]>([]);
 
+    useEffect(() => {
+        if(edit) onChange({[index]: form});
+      }, []);
+
     useEffect( () => {
         getFiles(files, index);
     }, [files])
@@ -58,6 +63,7 @@ const ProductForm = (
             registrationInputs[key] = formData.get(key);
         })
 
+        console.log({registrationInputs})
         return registrationInputs;
     }
 
@@ -71,6 +77,11 @@ const ProductForm = (
     }
 
     const deleteImage = (name: string) => {
+        if(edit) {
+            form.img_url = form.img_url === name ? "" : form.img_url;
+            form.imgs = form.imgs.filter( img => img !== name);
+            onChange({[index]: form})
+        }
         const filtered = files.filter( file => {
             return file.name !== name;
         });
@@ -79,43 +90,32 @@ const ProductForm = (
 
     const setImages = (images: string[]) => {
         let elems = [];
-        if(edit) {
-            for(let index = 0; index< 4; index++) {
-                    const url = images[index] ? `${process.env.REACT_APP_API_URL}/product/getImage/${form.id}/${images[index]}` : '';
-                    elems.push(<InputImages key={index} url={url} getFile={handleImage} deleteFile={deleteImage} />)
+        if(edit && images) {
+            for(let index = 0; index < 4; index++) {
+                    const url = images[index] ? `${process.env.REACT_APP_API_URL}/products/getImage/${form.id}/${images[index] || ""}` : '';
+                    elems.push(<InputImages key={index} edit={edit} url={url} getFile={handleImage} deleteFile={deleteImage} />)
             }
             return elems;
         } else {
-            for(let index = 0; index< 4; index++) {
-                elems.push(<InputImages key={index} url={''} getFile={handleImage} deleteFile={deleteImage} />)
+            for(let index = 0; index < 4; index++) {
+                elems.push(<InputImages key={index} edit={edit} url={''} getFile={handleImage} deleteFile={deleteImage} />)
             }
             return elems;
         }
     }
 
-    // const setPreviewImage = (image: File) => {
-    //     const reader = new FileReader();
-    //     reader.onloadend = () => {
-    //         handleChange({...form, ...{image: reader.result as string}});
-    //     };
-    //     reader.readAsDataURL(image);
-    // }
+    const getCategories = (categories: any) => {
+        console.log(categories)
+        return categories?.map( (category: any) => {
+            return <option key={category.id} label={category.name} value={category.id}></option>
+        })
+    }
 
-    // const getImage = (src: string) => {
-    //     return <ProductImage src={src} alt="image" />
-    // }
-
-    // const getCategories = (categories: any) => {
-    //     return categories.map( (category: any) => {
-    //         return <option key={category.id} label={category.name} value={category.id}></option>
-    //     })
-    // }
-
-    // const getCollections = (collections: any) => {
-    //     return collections.map( (collection: any) => {
-    //         return <option key={collection.id} label={collection.name} value={collection.id}></option>
-    //     })
-    // }
+    const getCollections = (collections: any) => {
+        return collections?.map( (collection: any) => {
+            return <option key={collection.id} label={collection.name} value={collection.id}></option>
+        })
+    }
 
     return (
         <Form id="productForm" onChange={ (event: any) => {
@@ -136,14 +136,14 @@ const ProductForm = (
                 <ProductInputs>
                     <Input name="name" type="text" placeholder="name" defaultValue={form.name} />
                     <Input name="price" type="number" placeholder="price" defaultValue={form.price} />
-                    {/* <Select name="category" defaultValue={form.category} >
-                        <option label="category" value={0}></option>
-                        {getCategories(data.categories)}
+                    <Select name="category" defaultValue={form.category} >
+                        {edit ? "" : <option label="Category" value={0}></option>}
+                        {data.categories.data ? getCategories(data.categories.data) : ""}
                     </Select>
                     <Select name="collection" defaultValue={form.collection} >
-                        <option label="collection" value={0}></option>
-                        {getCollections(data.collections)}
-                    </Select> */}
+                        {edit ? "" : <option label="Collection" value={0}></option>}
+                        {data.collections.data ? getCollections(data.collections.data) : ""}
+                    </Select>
                 </ProductInputs>
             </FormHeader>
             <FormFooter>

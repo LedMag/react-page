@@ -43,7 +43,7 @@ let Filter = ({params: { filters, categories, collections }, handleChange}: Type
         Array.from(keys).forEach( key => {
             filter[key] = formData.get(key);
         })
-        filter.order = 'asc';
+        filter.order = 'ASC';
         return filter;
     } 
 
@@ -72,20 +72,16 @@ let Filter = ({params: { filters, categories, collections }, handleChange}: Type
             <InputName placeholder='Name' name={'name'} defaultValue={filters.name} />
 
             <SelectCategory name={'category'} defaultValue={filters.category} >
-                <option label="Category" value={0}></option>
+                <option label="Category" defaultValue={0}></option>
                 {categoryOptions || []}
             </SelectCategory>
 
             <SelectCollection name={'collection'} defaultValue={filters.collection} >
-                <option label="Collection" value={0}></option>
+                <option label="Collection" defaultValue={0}></option>
                 {collectionOptions || []}
             </SelectCollection>
 
             <InputRange />
-
-            {/* <InputMin placeholder='Min' name={'minPrice'} defaultValue={filters.minPrice} />
-            
-            <InputMax placeholder='Max' name={'maxPrice'} defaultValue={filters.maxPrice} /> */}
         </FilterBox>
     )
 }

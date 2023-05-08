@@ -32,12 +32,14 @@ export function* handlerGetProducts() {
 export function* handlerGetProduct(action: any) {
     yield put(setLoaderState(true));
     try {
+        yield put(setLoaderState(true));
         const product: Generator = yield call(getProduct, action.payload);
         yield put(setProduct(product));
     } catch (error) {
         yield put(setErrors('Product is not found'));
+    }finally {
+        yield put(setLoaderState(false));
     }
-    yield put(setLoaderState(false));
 }
 
 export function* handlerGetProductsByFilter() {
@@ -118,7 +120,7 @@ export function* handlerDeleteProducts(action: any) {
 }
 
 export function* watchProductsSaga() {
-    yield debounce(500, GET_PRODUCTS_BY_FILTER, handlerGetProductsByFilter);
+    yield debounce(1000, GET_PRODUCTS_BY_FILTER, handlerGetProductsByFilter);
     yield takeLatest(GET_ALL_PRODUCTS, handlerGetProducts);
     yield takeLatest(GET_PRODUCT, handlerGetProduct);
     yield takeLatest(GET_DATA, handlerGetData);
