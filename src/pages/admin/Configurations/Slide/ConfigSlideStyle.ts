@@ -1,15 +1,13 @@
-import styled from "styled-components";
-import { colors } from "theme/colors";
-import { mediaMob } from "utils/FuncHelpers";
-
+import styled from 'styled-components';
+import { colors } from 'theme/colors';
+import { mediaMob } from 'utils/FuncHelpers';
 
 type Open = {
     open: boolean
 }
 
-export const ConfigCollectionsContainer = styled.div`
+export const ConfigSlideContainer = styled.div`
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -20,10 +18,16 @@ export const ConfigCollectionsContainer = styled.div`
     background-color: ${colors.blue};
 `
 
-export const CategoriesList = styled.div<Open>`
+export const SlideList = styled.div<Open>`
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: ${({open}) => open ? '10px' : ""};`
+
+    @media(min-width: 768px){
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    }
+`

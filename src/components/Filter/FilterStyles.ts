@@ -23,28 +23,6 @@ export const FilterBox = styled.form<Open>`
     align-content: center;
     align-items: center;
     justify-items: start;
-
-
-
-    /* padding: 5px;
-    
-    @media(min-width: 320px) {
-        position: absolute;
-        display: ${ ({open}) => open ? 'flex' : 'none'};
-        flex-direction: column;
-        width: 200px;
-        top: 0;
-        left: 0;
-        background-color: ${colors.blue};
-        z-index: 9;
-    }
-
-    @media(min-width: 768px) {
-        position: unset;
-        width: 100%;
-        display: flex;
-        background-color: ${colors.blue};
-    } */
 `
 
 // export const FilterBox = styled.form`

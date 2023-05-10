@@ -61,8 +61,8 @@ export const FormFooter = styled.div`
 `
 
 export const ProductImageInput = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
     height: 300px;
     position: relative;

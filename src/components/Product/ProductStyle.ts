@@ -1,5 +1,6 @@
 import { NavLink as BaseNavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { mediaMob } from 'utils/FuncHelpers';
 
 
 //карточка с продуктом
@@ -44,7 +45,7 @@ export const ProductInfo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 0 5px;
   height: 50%;
   width: 100%;
 `
@@ -53,12 +54,13 @@ export const ProductInfo = styled.div`
 export const ProductName = styled.span`
   height: 100%;
   width: 60%;
+  ${mediaMob('font-size','12px')};
 `
 //цена продукта
 export const ProductPrice = styled.span`
   height: 100%;
   width: 40%;
-  font-size: 18px;
+  ${mediaMob('font-size','12px')};
   text-align: right;
 `
 
@@ -67,7 +69,7 @@ export const ProductBtns = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 0 10px;
   z-index: 9;
   height: 50%;
 ` 
@@ -79,11 +81,12 @@ export const Add = styled.button`
   align-items: center;
   width: 40%;
   height: 100%;
-  background-color: gray;
-  font-size: 18px;
+  background-color: darkgray;
+  ${mediaMob('font-size','12px')};
+  border-radius: 5px;
 
   &:hover {
-    background-color: darkgray;
+    background-color: gray;
   }
 `
 //кнопка удалить
@@ -93,9 +96,10 @@ export const Delete = styled.button`
   align-items: center;
   width: 40%;
   height: 100%;
-  font-size: 18px;
-  color: red;
+  color: #6f0909;
   background-color: gray;
+  ${mediaMob('font-size','12px')};
+  border-radius: 5px;
 
   &:hover{
     background-color: darkgray;
@@ -112,8 +116,9 @@ export const Cancel = styled.div`
     align-items: center;
     width: 40%;
     height: 100%;
-    background-color: gray;
-    font-size: 18px;
+  background-color: gray;
+  ${mediaMob('font-size','12px')};
+  border-radius: 5px;
 
     &:hover {
       background-color: darkgray;

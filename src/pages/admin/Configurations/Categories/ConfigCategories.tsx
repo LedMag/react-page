@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import CategoryForm from './CategoryCard/CategoryForm';
+import CategoryDetails from './CategoryDetails/CategoryDetails';
 import { ConfigCategoriesContainer, CategoriesList } from './ConfigCategoriesStyle';
 
 type Image = {[key: string]: {files?: File[]}}; 
@@ -19,6 +20,7 @@ const ConfigCategories = (/* {isAllowed}: {isAllowed: boolean} */): JSX.Element 
     return (
         <ConfigCategoriesContainer onClick={handlerClick}>
             <CategoriesList open={open}>
+                <CategoryDetails></CategoryDetails>
                 <CategoryForm form={category}></CategoryForm>
             </CategoriesList>
         </ConfigCategoriesContainer>

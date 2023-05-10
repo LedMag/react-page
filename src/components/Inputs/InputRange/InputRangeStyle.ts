@@ -25,17 +25,23 @@ export const InputRangeContainer = styled.div`
 `
 
 export const InputMin = styled.input`
-    padding: 8px;
-    width: 15%;
-    border: none;
+    ${mediaMob('width', '26px')};
+    ${mediaMob('height', '22px')};
+    ${mediaMob('padding', '5px')};
+    border: 1px solid #595959;
     ${mediaMob('border-radius', '5px')};
+    ${mediaMob('font-size', '13px')};
+    color: grey;
 `
             
 export const InputMax = styled.input`
-    padding: 8px;
-    width: 15%;
-    border: none;
+    ${mediaMob('width', '26px')};
+    ${mediaMob('height', '22px')};
+    ${mediaMob('padding', '5px')};
+    border: 1px solid #595959;
     ${mediaMob('border-radius', '5px')};
+    ${mediaMob('font-size', '13px')};
+    color: grey;
 `
 
 export const RangeBox = styled.div`

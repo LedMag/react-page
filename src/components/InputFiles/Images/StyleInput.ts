@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import ReactDropdown from 'react-dropdown';
 
+//Секция инпут с добавлением изображения
 export const Section = styled.section`
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
 `
 
 export const Label = styled.label`
@@ -38,6 +40,7 @@ export const Img = styled.img`
   height: 100%;
   padding: 0;
   margin: 0;
+  border-radius: 15px;
 `
 
 export const ImageBox = styled.div`
@@ -65,7 +68,8 @@ export const Button = styled.button`
   width: 100%;
   height: 2rem;
   color: white;
-  background-color: rgba(255, 0, 0, 0.3);
+  background-color: rgba(255, 0, 0, 0.7);
+  text-shadow: 0px 0px 10px black;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,

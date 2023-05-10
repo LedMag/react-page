@@ -1,9 +1,9 @@
 import React from 'react'
 import ConfigCategories from './Categories/ConfigCategories';
 import ConfigCollections from './Collections/ConfigCollections';
+import ConfigSlide from './Slide/ConfigSlide';
 import {
-    ConfigurationsContainer,
-    ConfigSlide
+    ConfigurationsContainer
 } from './ConfigurationsStyle';
 
 
@@ -18,7 +18,7 @@ const Configurations = ({isAllowed}: {isAllowed: boolean}): JSX.Element => {
         <ConfigurationsContainer>
             <ConfigCategories></ConfigCategories>
             <ConfigCollections></ConfigCollections>
-            <ConfigSlide>ConfigSlide</ConfigSlide>
+            <ConfigSlide></ConfigSlide>
         </ConfigurationsContainer>
     )
 }

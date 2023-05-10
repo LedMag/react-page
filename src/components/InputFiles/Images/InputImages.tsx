@@ -61,7 +61,7 @@ const InputImages = ({edit, getFile, deleteFile, url}: {edit: boolean, getFile: 
       {image ? (
         <>
         <ImageBox>
-          <Img src={image} height="200" alt="upload" />
+          <Img src={url ? url : image} alt="upload" />
           <Button onClick={(e) => deleteHandler(image, e)}>
             delete image
           </Button>
