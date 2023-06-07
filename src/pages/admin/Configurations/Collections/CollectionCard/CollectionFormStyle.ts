@@ -80,7 +80,7 @@ export const FormHeader = styled.div`
 `
 
 //блок с формой инпут изображения
-export const CategoryImageInput = styled.div`
+export const CollectionImageInput = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -92,7 +92,7 @@ export const CategoryImageInput = styled.div`
     }
 `
 
-export const CategoryImage = styled.img`
+export const CollectionImage = styled.img`
     width: 100%;
     height: 100%;
     position: absolute;
@@ -101,7 +101,7 @@ export const CategoryImage = styled.img`
 `
 
 //обертка зона ввода текста названия категории
-export const CategoryInputs = styled.div`
+export const CollectionInputs = styled.div`
     width: 100%;
     height: auto;
     display: flex;

@@ -1,28 +1,38 @@
 import InputImages from 'components/InputFiles/Images/InputImages';
 import React from 'react';
-import { Button, FormHeader, CategoryImageInput, CategoryInputs, Input, FormFooter, Textarea, Form } from './CategoryFormStyle';
+import { Button, 
+    FormHeader, 
+    CategoryImageInput, 
+    CategoryInputs, 
+    Input, 
+    FormFooter, 
+    Textarea, 
+    Form 
+} from './CategoryFormStyle';
 
 interface ICategoryForm {
-    id?: number,
+    // id?: number,
     name: string,
     // price: string,
     // image: string,
     // imgs: string[],
     // category: string,
     // collection: string,
-    // description_en: string,
-    // description_es: string,
-    // description_ru: string,
-    description: string,
-    img: string
+    description_en: string,
+    description_es: string,
+    description_ru: string,
+    // description: string,
+    // img: string
 }
 
 interface ICategoryFormElement {
     form: ICategoryForm,
+    handlerChange: any,
+    save: any
 }
 
 const CategoryForm = (
-    {form }: ICategoryFormElement
+    { form, handlerChange, save }: ICategoryFormElement
     ): JSX.Element => {
     // const [files, setFiles] = useState<File[]>([]);
 
@@ -30,24 +40,19 @@ const CategoryForm = (
     //     getFiles(files, index);
     // }, [files])
 
-    // const getCategoryForm = (form: any): ICategoryForm | undefined => {
-    //     if(!form) return undefined;
-    //     const registrationInputs: any = {};
+    const getCategoryForm = (form: any): ICategoryForm | undefined => {
+        if(!form) return;
 
-    //     const formData = new FormData(form);
+        const registrationInputs: any = {};
+        const formData = new FormData(form);
+        const keys = Array.from(formData.keys());
+        keys.forEach( key => {
+            if(key === 'image') return;
+            registrationInputs[key] = formData.get(key);
+        })
 
-    //     const keys = formData.keys();
-    //     Array.from(keys).forEach( key => {
-    //         if(key === 'image') return;
-    //         registrationInputs[key] = formData.get(key);
-    //     })
-
-    //     return registrationInputs;
-    // }
-
-    // const handleChange = (data: ICategoryForm | undefined) => {
-    //     onChange({[index]: {...form, ...data}});
-    // }
+        return registrationInputs;
+    }
 
     const handleImage = (file: File) => {
         // setFiles([...files, file]);
@@ -104,9 +109,9 @@ const CategoryForm = (
     return (
         <Form id="CategoryForm" onChange={ (event: any) => {
             event.preventDefault();
-            // handleChange(getCategoryForm(event.target.form));
+            handlerChange(getCategoryForm(event.target.form));
         }} >
-            <Button>x</Button>
+            {/* <Button>x</Button> */}
             <FormHeader>
                 <CategoryImageInput>
                     <InputImages key={1} edit={false} url={""} getFile={handleImage} deleteFile={deleteImage} />
@@ -120,21 +125,22 @@ const CategoryForm = (
                     name="description_en" 
                     className="input description"
                     placeholder="description.en"
-                    defaultValue={form.description}
+                    defaultValue={form.description_en}
                 ></Textarea>
                 <Textarea 
                     name="description_es" 
                     className="input description" 
                     placeholder="description.es"
-                    defaultValue={form.description}
+                    defaultValue={form.description_es}
                 ></Textarea>
                 <Textarea 
                     name="description_ru" 
                     className="input description" 
                     placeholder="description.ru"
-                    defaultValue={form.description}
+                    defaultValue={form.description_ru}
                 ></Textarea>
             </FormFooter>
+            <Button onClick={save}>Save</Button>
         </Form>
     )
 }

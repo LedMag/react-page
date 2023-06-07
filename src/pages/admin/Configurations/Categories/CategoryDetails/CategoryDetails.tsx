@@ -11,16 +11,22 @@ import { CategoryDetailsContainer,
     CategoryDetailsItem
 } from "./CategoryDetailsStyle";
 
-const CategoryDetails = ()=>{
+type Category = {
+    src: string,
+    name: string,
+    desc: string
+}
+
+const CategoryDetails = ({src, name, desc}: Category) => {
 
     return(
         <CategoryDetailsContainer>
             <CategoryDetailsBox>
-                <CategoryDetailsIMG></CategoryDetailsIMG>
+                <CategoryDetailsIMG src={src}></CategoryDetailsIMG>
                 <CategoryDetailsItem>
                     <CategoryDetailsInfo>
-                        <CategoryDetailsName></CategoryDetailsName>
-                        <CategoryDetailsDesc></CategoryDetailsDesc>
+                        <CategoryDetailsName>{name}</CategoryDetailsName>
+                        <CategoryDetailsDesc>{desc}</CategoryDetailsDesc>
                     </CategoryDetailsInfo>
                     <CategoryDetailsButtons>
                         <CategoryDetailsEdit>Edit</CategoryDetailsEdit>

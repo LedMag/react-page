@@ -11,16 +11,22 @@ import { CollectionDetailsContainer,
     CollectionDetailsItem
 } from "./CollectionDetailsStyle";
 
-const CollectionDetails = ()=>{
+type Collection = {
+    src: string,
+    name: string,
+    desc: string
+}
+
+const CollectionDetails = ({src, name, desc}: Collection)=>{
 
     return(
         <CollectionDetailsContainer>
             <CollectionDetailsBox>
-                <CollectionDetailsIMG></CollectionDetailsIMG>
+                <CollectionDetailsIMG src={src}></CollectionDetailsIMG>
                 <CollectionDetailsItem>
                     <CollectionDetailsInfo>
-                        <CollectionDetailsName></CollectionDetailsName>
-                        <CollectionDetailsDesc></CollectionDetailsDesc>
+                        <CollectionDetailsName>{name}</CollectionDetailsName>
+                        <CollectionDetailsDesc>{desc}</CollectionDetailsDesc>
                     </CollectionDetailsInfo>
                     <CollectionDetailsButtons>
                         <CollectionDetailsEdit>Edit</CollectionDetailsEdit>

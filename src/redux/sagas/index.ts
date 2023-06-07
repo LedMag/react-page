@@ -1,6 +1,6 @@
 import { getAllProducts, getProduct, getProductsByFilter } from "../../api/getProducts";
 import { put, call, all, fork, takeLatest, debounce } from 'redux-saga/effects'
-import { setProducts, setErrors, setLoaderState, setCategories, setCollections, setUser, deleteProductForm, setProduct } from "redux/actions/actionCreator";
+import { setProducts, setErrors, setLoaderState, setCategories, setCollections, setUser, deleteProductForm, setProduct, deleteCategoryForm, deleteCollectionForm } from "redux/actions/actionCreator";
 import store from "redux/store";
 import { getAllCategories, getAllCollections } from "api/getData";
 import { login, logout, register } from "api/auth";
@@ -14,9 +14,13 @@ import {
     POST_PRODUCT,
     DELETE_PRODUCT,
     GET_PRODUCT,
+    POST_CATEGORY_FORM,
+	POST_COLLECTION_FORM
 } from "redux/constans";
 import { postProducts } from "api/postProducts";
 import { deleteProducts } from "api/deleteProducts";
+import { postCategory } from "api/postCategory";
+import { postCollection } from "api/postCollection";
 
 export function* handlerGetProducts() {
     yield put(setLoaderState(true));
@@ -110,6 +114,24 @@ export function* handlerCreateProducts(action: any) {
     }
 }
 
+export function* handlerCreateCategory(action: any) {
+    try {
+        const response: Generator = yield call(postCategory, action.payload);
+        yield put(deleteCategoryForm());
+    } catch (error) {
+        console.log('Error', error);
+    }
+}
+
+export function* handlerCreateCollection(action: any) {
+	try {
+		const response: Generator = yield call (postCollection, action.payload);
+		yield put(deleteCollectionForm());
+	} catch (error) {
+		console.log('Error', error);
+	}
+}
+
 export function* handlerDeleteProducts(action: any) {
     try {
         const response: Generator = yield call(deleteProducts, action.payload);
@@ -128,6 +150,8 @@ export function* watchProductsSaga() {
     yield takeLatest(POST_USER, handlerPostUser);
     yield takeLatest(POST_PRODUCT, handlerCreateProducts);
     yield takeLatest(DELETE_PRODUCT, handlerDeleteProducts);
+    yield takeLatest(POST_CATEGORY_FORM, handlerCreateCategory);
+    yield takeLatest(POST_COLLECTION_FORM, handlerCreateCollection);
     yield takeLatest(LOGOUT, handlerLogout);
 }
 

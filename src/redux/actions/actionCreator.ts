@@ -17,7 +17,13 @@ import {
     GET_CART,
     SET_CART,
     DELETE_CART,
-    UPDATE_CART
+    UPDATE_CART,
+    SET_CATEGORY_FORM,
+    DELETE_CATEGORY_FORM,
+    POST_CATEGORY_FORM,
+    SET_COLLECTION_FORM,
+    POST_COLLECTION_FORM,
+    DELETE_COLLECTION_FORM
 } from '../constans';
 
 export const setLang = (payload: any) => ({
@@ -118,3 +124,32 @@ export const updateCart = (payload: any) => ({
 export const deleteCart = () => ({
     type: DELETE_CART
 });
+
+export const setCategoryForm = (payload: any) => ({
+    type: SET_CATEGORY_FORM,
+    payload
+})
+
+export const postCategoryForm = (payload: any) => ({
+    type: POST_CATEGORY_FORM,
+    payload
+})
+
+export const deleteCategoryForm = () => ({
+    type: DELETE_CATEGORY_FORM
+})
+
+// (payload: any) => { return {payload: 333}}
+
+export const setCollectionForm = (payload: any) => ({
+    type: SET_COLLECTION_FORM,
+    payload
+})
+
+export const postCollectionForm = (payload: any) => ({
+    type: POST_COLLECTION_FORM
+})
+
+export const deleteCollectionForm = () => ({
+    type: DELETE_COLLECTION_FORM
+})

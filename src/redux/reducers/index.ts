@@ -11,6 +11,8 @@ import { productsForms } from "./productsForms";
 import { lang } from "./lang";
 import { product } from "./product";
 import { cart } from "./cart";
+import { categoryForm } from "./category";
+import { collectionForm } from "./collection";
 
 const reducer = combineReducers({
     lang,
@@ -25,7 +27,9 @@ const reducer = combineReducers({
     registrationForm,
     productsForms,
     toggleFilter,
-    cart
+    cart,
+    categoryForm,
+    collectionForm
 });
 
 export default reducer;

@@ -12,6 +12,15 @@ export const CollectionDetailsContainer = styled.div`
     justify-content: space-between;
 `
 
+export const CollectionList = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: red;
+`
+
 export const CollectionDetailsBox = styled.div`
     ${mediaMob('height','75px')};
     background: white;
