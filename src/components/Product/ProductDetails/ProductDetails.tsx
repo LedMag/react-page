@@ -22,7 +22,7 @@ const ProductDetails = (/* {product}: { product: IProduct} */): JSX.Element => {
     });
 
     const dispatch = useDispatch();
-    const [selected, setSelected] = useState('');
+    const [selected, setSelected] = useState<string>();
     const [loading, setLoading] = useState(true);
 
     useEffect( () => {
@@ -33,12 +33,12 @@ const ProductDetails = (/* {product}: { product: IProduct} */): JSX.Element => {
     useEffect( () => {
         if(!product) return;
         setLoading(false);
-        setSelected(product.img_url);
+        if(product.img_url) setSelected(product.img_url);
         setActiveImg(null);
     }, [product]);
     
     const renderImages = (): Array<JSX.Element> | undefined => {
-        const url = `${process.env.REACT_APP_API_URL}/products/getImage/${id}/`;
+        const url = `${process.env.REACT_APP_API_URL}/products/image?id=${id}&url=`;
         if(!product.imgs) return;
         const imagesList: Array<JSX.Element> = product.imgs
         .map( (image: string, index: number) => {
@@ -58,7 +58,7 @@ const ProductDetails = (/* {product}: { product: IProduct} */): JSX.Element => {
         } else {
             const img: HTMLImageElement | null = document.querySelector('.product__img');
             img?.classList.add('active');
-            setSelected(img?.src || '');
+            if(img?.src) setSelected(img.src);
         }
     }
 
@@ -86,7 +86,7 @@ const ProductDetails = (/* {product}: { product: IProduct} */): JSX.Element => {
                 </Buttons>
                 : ''
             }
-            {product.imgs?.length ? <ProductImageView src={selected} alt={product.name} /> : <ProductImageView src={noImage} alt={product.name} />}
+            <ProductImageView src={selected || noImage} alt={product.name} />
             <ProductImages>
                 {renderImages()}
             </ProductImages>

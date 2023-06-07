@@ -58,7 +58,7 @@ const Product = ({product, isAllowed}: { product: IProduct, isAllowed: boolean})
 
     return (
         <NavLink to={"/products/" + product.id} key={product.id} state={product.id} >
-            {product.img_url ? <ProductImage src={`${process.env.REACT_APP_API_URL}/products/getImage/${product.id}/${product.img_url}`} alt={product.name} /> : 
+            {product.img_url ? <ProductImage src={`${process.env.REACT_APP_API_URL}/products/image?id=${product.id}&url=${product.img_url}`} alt={product.name} /> : 
             <ProductImage src={noImage} alt={product.name} /> }
             <ProductHover>
                 <ProductInfo>
